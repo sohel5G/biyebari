@@ -12,7 +12,7 @@ const Header = () => {
     const [headerNavDrawer, setHeaderNavDrawer] = useState(false);
 
     return (
-        <header className="bg-slate-50 border-b border-b-slate-200">
+        <header className="bg-slate-50 border-b border-b-slate-200 z-50">
             <Container>
 
                 {/* Main nav bar */}
@@ -52,9 +52,9 @@ const Header = () => {
 
 
                 {/* Drawer area  */}
-                <div onClick={() => setHeaderNavDrawer(false)} className={`${headerNavDrawer && 'lg:hidden fixed top-0 left-0 w-full h-screen bg-[#000000b0]'}`}>
+                <div onClick={() => setHeaderNavDrawer(false)} className={`${headerNavDrawer && 'lg:hidden fixed top-0 left-0 w-full h-screen bg-[#000000b0] z-50'}`}>
 
-                    <div className={`drawer-wrapper transform transition-transform duration-300 ease-in-out ${headerNavDrawer ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:hidden fixed top-0 left-0 h-full w-80 bg-slate-50 overflow-hidden`}>
+                    <div className={`drawer-wrapper transform transition-transform duration-300 ease-in-out ${headerNavDrawer ? 'translate-x-0 z-50' : '-translate-x-full'} lg:translate-x-0 lg:hidden fixed top-0 left-0 h-full w-80 bg-slate-50 overflow-hidden z-50`}>
 
                         {/* Drawer content  */}
                         <div className="h-screen relative overflow-y-auto">
