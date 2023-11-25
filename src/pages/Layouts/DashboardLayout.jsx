@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import { MdClose } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import "./DashboardLayout.css";
-import { FaEdit, FaHeart, FaUsers } from "react-icons/fa";
+import { FaEdit, FaHeart, FaUsers, FaTachometerAlt, FaHome } from "react-icons/fa";
 import { MdLibraryBooks } from "react-icons/md";
 import { BiSolidContact } from "react-icons/bi";
 import { RiShutDownLine } from "react-icons/ri";
-import { AiOutlineDashboard } from "react-icons/ai";
 import { TbPremiumRights } from "react-icons/tb";
+import { FcAbout } from "react-icons/fc";
 
 const DashboardLayout = () => {
     const [showSidebar, setShowSidebar] = useState(window.innerWidth >= 1024);
@@ -52,7 +52,7 @@ const DashboardLayout = () => {
 
 
 
-            <div className="lg:grid lg:grid-cols-5 lg:gap-3">
+            <div className="lg:grid lg:grid-cols-4 lg:gap-3">
 
                 <div className="bg-gray-50 fixed lg:relative w-80 lg:w-full top-0 left-0 z-50" style={sidebarStyles}>
                     <div className="h-screen relative overflow-y-auto">
@@ -64,12 +64,12 @@ const DashboardLayout = () => {
 
                         {/* Sidebar content */}
                         <div>
-                            <ul className="dashboard-menu mt-32">
+                            <ul className="dashboard-menu mt-20 pb-10">
 
                                 {/* Admin routes  */}
                                 <li>
                                     <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/dashboard/admin'}>
-                                        <span className="text-xl"><AiOutlineDashboard /></span>
+                                        <span className="text-xl"><FaTachometerAlt /></span>
                                         <span>Dashboard</span>
                                     </NavLink>
                                 </li>
@@ -86,18 +86,28 @@ const DashboardLayout = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/premium'}>
-                                        <span className="text-xl"><TbPremiumRights /></span>
+                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2" to={'/requested'}>
+                                        <span className="text-xl mt-1"><BiSolidContact /></span>
                                         <span>Approved Contact Request</span>
                                     </NavLink>
                                 </li>
+                                <li>
+                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/logout'}>
+                                        <span className="text-xl"><RiShutDownLine /></span>
+                                        <span>Logout</span>
+                                    </NavLink>
+                                </li>
+
+
 
                                 <hr className="my-8" />
+
+
 
                                 {/* User routes  */}
                                 <li>
                                     <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/dashboard/client'}>
-                                        <span className="text-xl"><AiOutlineDashboard /></span>
+                                        <span className="text-xl"><FaTachometerAlt /></span>
                                         <span>Dashboard</span>
                                     </NavLink>
                                 </li>
@@ -132,6 +142,44 @@ const DashboardLayout = () => {
                                         <span>Logout</span>
                                     </NavLink>
                                 </li>
+
+
+
+
+
+                                <hr className="my-8" />
+
+
+
+                                <li>
+                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/'}>
+                                        <span className="text-xl"><FaHome /></span>
+                                        <span>Home</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/biodatas'}>
+                                        <span className="text-xl"><MdLibraryBooks /></span>
+                                        <span>Biodatas</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/about-us'}>
+                                        <span className="text-xl"><FcAbout /></span>
+                                        <span>About us</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/contact-us'}>
+                                        <span className="text-xl"><BiSolidContact /></span>
+                                        <span>Contact us</span>
+                                    </NavLink>
+                                </li>
+
+
+
+
+
                             </ul>
                         </div>
 
@@ -141,7 +189,7 @@ const DashboardLayout = () => {
 
 
                 {/*Dashboard Content here */}
-                <div className='lg:col-span-4 p-4'>
+                <div className='lg:col-span-3 p-4'>
                     <h1 className="text-3xl">This is dashboard <br /> content area </h1>
                 </div>
 
