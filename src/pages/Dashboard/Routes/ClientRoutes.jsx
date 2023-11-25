@@ -21,7 +21,7 @@ const ClientRoutes = () => {
             </li>
 
             <li>
-                <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2 active" to={'/view'}>
+                <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2" to={'/view'}>
                     <span className="text-xl mt-1"> <MdLibraryBooks /> </span>
                     <span>View Biodata</span>
                 </NavLink>
