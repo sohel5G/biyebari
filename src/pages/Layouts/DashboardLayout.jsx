@@ -1,14 +1,10 @@
 import { LuMenu } from "react-icons/lu";
 import { useState, useEffect } from "react";
 import { MdClose } from "react-icons/md";
-import { NavLink } from "react-router-dom";
 import "./DashboardLayout.css";
-import { FaEdit, FaHeart, FaUsers, FaTachometerAlt, FaHome } from "react-icons/fa";
-import { MdLibraryBooks } from "react-icons/md";
-import { BiSolidContact } from "react-icons/bi";
-import { RiShutDownLine } from "react-icons/ri";
-import { TbPremiumRights } from "react-icons/tb";
-import { FcAbout } from "react-icons/fc";
+import AdminRoutes from "../Dashboard/Routes/AdminRoutes";
+import ClientRoutes from "../Dashboard/Routes/ClientRoutes";
+import PublicRoutes from "../Dashboard/Routes/PublicRoutes";
 
 const DashboardLayout = () => {
     const [showSidebar, setShowSidebar] = useState(window.innerWidth >= 1024);
@@ -65,120 +61,16 @@ const DashboardLayout = () => {
                         {/* Sidebar content */}
                         <div>
                             <ul className="dashboard-menu mt-20 pb-10">
-
-                                {/* Admin routes  */}
-                                <li>
-                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/dashboard/admin'}>
-                                        <span className="text-xl"><FaTachometerAlt /></span>
-                                        <span>Dashboard</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/users'}>
-                                        <span className="text-xl"><FaUsers /></span>
-                                        <span>Manage Users</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/premium'}>
-                                        <span className="text-xl"><TbPremiumRights /></span>
-                                        <span>Approved Premium</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2" to={'/requested'}>
-                                        <span className="text-xl mt-1"><BiSolidContact /></span>
-                                        <span>Approved Contact Request</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/logout'}>
-                                        <span className="text-xl"><RiShutDownLine /></span>
-                                        <span>Logout</span>
-                                    </NavLink>
-                                </li>
-
-
+                                
+                                <AdminRoutes/>
 
                                 <hr className="my-8" />
 
-
-
-                                {/* User routes  */}
-                                <li>
-                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/dashboard/client'}>
-                                        <span className="text-xl"><FaTachometerAlt /></span>
-                                        <span>Dashboard</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/add'}>
-                                        <span className="text-xl"><FaEdit /></span>
-                                        <span>Edit Biodata</span>
-                                    </NavLink>
-                                </li>
-
-                                <li>
-                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2 active" to={'/view'}>
-                                        <span className="text-xl"> <MdLibraryBooks /> </span>
-                                        <span>View Biodata</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/request'}>
-                                        <span className="text-xl"><BiSolidContact /></span>
-                                        <span>Contact Request</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/favourite'}>
-                                        <span className="text-xl"><FaHeart /></span>
-                                        <span>My Favourites</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/logout'}>
-                                        <span className="text-xl"><RiShutDownLine /></span>
-                                        <span>Logout</span>
-                                    </NavLink>
-                                </li>
-
-
-
-
+                                <ClientRoutes/>
 
                                 <hr className="my-8" />
 
-
-
-                                <li>
-                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/'}>
-                                        <span className="text-xl"><FaHome /></span>
-                                        <span>Home</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/biodatas'}>
-                                        <span className="text-xl"><MdLibraryBooks /></span>
-                                        <span>Biodatas</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/about-us'}>
-                                        <span className="text-xl"><FcAbout /></span>
-                                        <span>About us</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex items-center gap-2" to={'/contact-us'}>
-                                        <span className="text-xl"><BiSolidContact /></span>
-                                        <span>Contact us</span>
-                                    </NavLink>
-                                </li>
-
-
-
-
+                                <PublicRoutes/>
 
                             </ul>
                         </div>
