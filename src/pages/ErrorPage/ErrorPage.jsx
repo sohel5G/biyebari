@@ -10,7 +10,7 @@ const ErrorPage = () => {
                         <img src={error404} alt="404 image" />
                     </div>
                     <div className="mt-10 text-center">
-                        <Link className="text-primary-normal hover:border-b hover:border-primary-normal text-lg" to={'/'}> <button> Go to Home Page </button> </Link>
+                        <Link className="text-primary-normal border-b border-primary-normal text-lg" to={'/'}> <button> Go to Home Page </button> </Link>
                     </div>
                 </div>
             </div>
