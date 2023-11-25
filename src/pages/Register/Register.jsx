@@ -3,11 +3,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import loaderIcon from "../../assets/icons/loader.gif"
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import SocialLogin from "../Utils/SocialLogin/SocialLogin";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import LoaderIcon from "../Utils/LoaderIcon";
 
 const Register = () => {
     const { registerUser, userUpdateOnSignUp, setUser } = useAuth();
@@ -222,7 +222,7 @@ const Register = () => {
                                 type="submit"
                                 className={`bg-primary-normal text-white cursor-pointer font-medium rounded-lg text-sm px-5 py-2.5`}
                             />
-                            {submitBtnLoader && <img src={loaderIcon} alt="Loader" className="w-6" />}
+                            {submitBtnLoader && <LoaderIcon/>}
                         </div>
 
                         <p className="text-sm font-light text-gray-500">

@@ -7,10 +7,12 @@ import "./header.css";
 import SocialWidget from "../pages/Utils/SocialWidget";
 import Logo from "../pages/Utils/Logo";
 import { NavLink } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import LoaderIcon from "../pages/Utils/LoaderIcon";
 
 const Header = () => {
     const [headerNavDrawer, setHeaderNavDrawer] = useState(false);
-
+    const { user, loading } = useAuth();
 
     return (
         <header className="bg-slate-50 border-b border-b-slate-200 z-50">
@@ -43,7 +45,13 @@ const Header = () => {
                         </ul>
                     </nav>
                     <div>
-                        <Button text="Login" link="/login" />
+                        {
+                            loading ?
+                                <LoaderIcon /> :
+                                user ?
+                                    <Button text="Dashboard" link="/dashboard" /> :
+                                    <Button text="Login" link="/login" />
+                        }
                     </div>
                 </div>
                 {/* Main nav bar End*/}
