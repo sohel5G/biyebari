@@ -1,12 +1,14 @@
 import { createContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
-// import axios from "axios";
 import auth from "../config/AuthConfig";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AllContext = createContext()
 
 const Authprovider = ({ children }) => {
+
+    const axiosPublic = useAxiosPublic();
 
     const googleProvider = new GoogleAuthProvider();
     const [user, setUser] = useState(null);
@@ -38,24 +40,25 @@ const Authprovider = ({ children }) => {
             setLoading(false)
 
 
-            // const userEmail = currentUser?.email || user?.email;
-            // // set a token for this user 
-            // if (currentUser) {
-            //     axios.post('https://community-food-sharing-server-chi.vercel.app/jwt', { email: userEmail }, { withCredentials: true })
-            //         .then(res => {
-            //             console.log('Token set : ', res.data)
-            //         })
-            // }// set a token for this user end
+            const userEmail = currentUser?.email || user?.email;
+            // set a userKey for this user 
+            if (currentUser) {
+                axiosPublic.post('/jwt', { email: userEmail })
+                    .then(res => {
+                        console.log('userKey set : ', res.data.success)
+                    })
+            }
+            // set a userKey for this user end
 
-            // //remove token if user logout
-            // else {
-            //     axios.post('https://community-food-sharing-server-chi.vercel.app/logout', { email: userEmail }, { withCredentials: true })
-            //         .then(res => {
-            //             console.log('Token removed', res.data)
-            //         })
-            // }//remove token if user logout end
-
-
+            //remove userKey if user logout
+            else {
+                axiosPublic.post('/logout', { email: userEmail }, { withCredentials: true })
+                    .then(res => {
+                        console.log('userKey removed', res.data.success)
+                    })
+            }
+            //remove userKey if user logout end
+            
 
         });
 
@@ -64,7 +67,7 @@ const Authprovider = ({ children }) => {
             unSubscribe()
         }
 
-    }, [])
+    }, [axiosPublic, user?.email])
 
 
     const allInfo = {

@@ -3,24 +3,22 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-// import useAxiosPublic from "../../hooks/useAxiosPublic";
 import loaderIcon from "../../assets/icons/loader.gif"
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import SocialLogin from "../Utils/SocialLogin/SocialLogin";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Register = () => {
     const { registerUser, userUpdateOnSignUp, setUser } = useAuth();
-    const [submitBtnLoader, setSubmitBtnLoader] = useState(false);
 
+    const [submitBtnLoader, setSubmitBtnLoader] = useState(false);
     const [showPass, setShowPass] = useState(true);
-    // const [showConfirmPass, setShowConfirmPass] = useState(true);
 
     const navigate = useNavigate();
     const location = useLocation();
 
-
-    // const axiosPublic = useAxiosPublic();
+    const axiosPublic = useAxiosPublic()
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const onSubmit = data => {
@@ -31,33 +29,40 @@ const Register = () => {
             .then((succData) => {
 
                 const user = succData.user;
+                user
 
                 userUpdateOnSignUp({ displayName: data.name, photoURL: data.photo_url, email: data.email })
                     .then(() => {
                         setUser({ displayName: data.name, photoURL: data.photo_url, email: data.email });
 
-                        // //store user to database
-                        // const userInfo = { name: data.name, email: data.email }
-                        // axiosPublic.post('/store-users', userInfo)
-                        //     .then(res => {
-                        //         if (res.data.insertedId) {
-                        //             swal({
-                        //                 text: "Registration Success",
-                        //                 icon: "success",
-                        //                 buttons: false,
-                        //             })
-                        //             setSubmitBtnLoader(false);
-                        //         }
+                        //store user to database
+                        const userInfo = { name: data.name, email: data.email }
+                        axiosPublic.post('/store-users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
 
-                        //         console.log('user stored into database', res.data);
+                                    Swal.fire({
+                                        position: "center",
+                                        icon: "success",
+                                        title: "Registration Success",
+                                        showConfirmButton: false,
+                                        timer: 3000
+                                    });
 
-                        //         reset()
-                        //         navigate(location?.state ? location?.state : '/dashboard/profile');
+                                    // console.log('User stored into database', res.data);
 
-                        //     })
-                        // //store user to database end
+                                    reset()
+                                    navigate(location?.state ? location?.state : '/');
+                                    setSubmitBtnLoader(false);
 
-                        console.log('profile data set')
+                                }
+
+                            }).catch((error) => {
+                                console.log('store user error:', error)
+                            })
+                        //store user to database end
+
+                        // console.log('profile data set')
                         setSubmitBtnLoader(false);
 
                     }).catch((error) => {
@@ -67,7 +72,7 @@ const Register = () => {
 
                     });
 
-                console.log('SignUp User created', user)
+                // console.log('SignUp User created', user)
                 setSubmitBtnLoader(false);
 
             })
@@ -230,7 +235,7 @@ const Register = () => {
                             </Link>
                         </p>
                     </form>
-                    <SocialLogin/>
+                    <SocialLogin />
                 </div>
             </div>
 

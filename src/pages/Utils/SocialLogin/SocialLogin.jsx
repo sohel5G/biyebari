@@ -1,14 +1,15 @@
 import { FaGoogle } from "react-icons/fa";
-// import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const SocialLogin = () => {
     const { googleSignInWithPopup } = useAuth();
-    // const axiosPublic = useAxiosPublic();
+    const axiosPublic = useAxiosPublic()
 
-    // const location = useLocation();
-    // const navigate = useNavigate()
+    const location = useLocation();
+    const navigate = useNavigate()
 
     const handleUserSignInWithPopup = () => {
 
@@ -16,29 +17,36 @@ const SocialLogin = () => {
             .then((succData) => {
 
                 const userInfo = { name: succData?.user?.displayName, email: succData?.user?.email };
-                // axiosPublic.post('/store-users', userInfo)
-                //     .then(res => {
+                axiosPublic.post('/store-users', userInfo)
+                    .then(res => {
 
-                //         if (res.data.insertedId) {
-                //             swal({
-                //                 text: `brand new user successfully login & store in the database`,
-                //                 icon: "success",
-                //                 buttons: false,
-                //             })
-                //             navigate(location?.state ? location?.state : '/dashboard/profile');
-                //         }
-                //         else {
-                //             swal({
-                //                 text: `Login success | ${res.data.message}, so it's not store in the database`,
-                //                 icon: "success",
-                //                 buttons: false,
-                //             })
-                //             navigate(location?.state ? location?.state : '/dashboard/profile');
-                //         }
+                        if (res.data.insertedId) {
 
-                //     })
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: "brand new user successfully login & store in the database",
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                            navigate(location?.state ? location?.state : '/');
 
-                console.log('user login by popup', userInfo)
+                        }
+                        else {
+
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: `Login success | ${res.data.message}, so it's not store in the database`,
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                            navigate(location?.state ? location?.state : '/');
+                        }
+
+                    })
+
+                // console.log('user login by popup', userInfo)
 
             }).catch((errorData) => {
 
