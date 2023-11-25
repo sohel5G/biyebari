@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 const Header = () => {
     const [headerNavDrawer, setHeaderNavDrawer] = useState(false);
 
+
     return (
         <header className="bg-slate-50 border-b border-b-slate-200 z-50">
             <Container>
@@ -18,12 +19,12 @@ const Header = () => {
                 {/* Main nav bar */}
                 <div className="navigation flex justify-between gap-5 items-center py-4">
                     <div className="block lg:hidden">
-                        <button onClick={() => setHeaderNavDrawer(!headerNavDrawer)} className="bg-primary-normal hover:bg-primary-hover py-2 px-3 text-white rounded-lg text-xl flex items-center gap-1"> 
+                        <button onClick={() => setHeaderNavDrawer(!headerNavDrawer)} className="bg-primary-normal hover:bg-primary-hover py-2 px-3 text-white rounded-lg text-xl flex items-center gap-1">
                             <LuMenu /> <span className="text-base font-medium">Menu</span>
                         </button>
                     </div>
                     <div>
-                        <Logo width="w-36"/>
+                        <Logo width="w-36" />
                     </div>
                     <nav className="hidden lg:block">
                         <ul className="header-menu flex gap-3 items-center justify-center">
@@ -64,7 +65,7 @@ const Header = () => {
 
                             <div className="p-4 pb-5 pt-16">
                                 <div>
-                                    <Logo width="w-56"/>
+                                    <Logo width="w-56" />
                                 </div>
                                 <ul className="header-menu mt-10">
                                     <li className="py-2">
