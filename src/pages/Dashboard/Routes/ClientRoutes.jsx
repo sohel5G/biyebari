@@ -14,32 +14,32 @@ const ClientRoutes = () => {
                 </NavLink>
             </li> 
             <li>
-                <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2" to={'/add'}>
+                <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2" to={'/dashboard/add'}>
                     <span className="text-xl mt-1"><FaEdit /></span>
                     <span>Edit Biodata</span>
                 </NavLink>
             </li>
 
             <li>
-                <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2" to={'/view'}>
+                <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2" to={'/dashboard/view'}>
                     <span className="text-xl mt-1"> <MdLibraryBooks /> </span>
                     <span>View Biodata</span>
                 </NavLink>
             </li>
             <li>
-                <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2" to={'/request'}>
+                <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2" to={'/dashboard/request'}>
                     <span className="text-xl mt-1"><BiSolidContact /></span>
                     <span>Contact Request</span>
                 </NavLink>
             </li>
             <li>
-                <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2" to={'/favourite'}>
+                <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2" to={'/dashboard/favourite'}>
                     <span className="text-xl mt-1"><FaHeart /></span>
                     <span>My Favourites</span>
                 </NavLink>
             </li>
             <li>
-                <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2" to={'/logout'}>
+                <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2" to={'/dashboard/logout'}>
                     <span className="text-xl mt-1"><RiShutDownLine /></span>
                     <span>Logout</span>
                 </NavLink>

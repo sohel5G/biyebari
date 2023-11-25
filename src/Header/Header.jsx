@@ -34,13 +34,13 @@ const Header = () => {
                                 <NavLink to={'/'} className="text-base font-medium hover:!bg-primary-hover hover:text-white py-2 px-4 rounded-lg"> Home </NavLink>
                             </li>
                             <li>
-                                <NavLink to={'/biodata'} className="text-base font-medium hover:!bg-primary-hover hover:text-white py-2 px-4 rounded-lg"> Biodatas </NavLink>
+                                <NavLink to={'/biodatas'} className="text-base font-medium hover:!bg-primary-hover hover:text-white py-2 px-4 rounded-lg"> Biodatas </NavLink>
                             </li>
                             <li>
-                                <NavLink to={'/about'} className="text-base font-medium hover:!bg-primary-hover hover:text-white py-2 px-4 rounded-lg"> About us </NavLink>
+                                <NavLink to={'/about-us'} className="text-base font-medium hover:!bg-primary-hover hover:text-white py-2 px-4 rounded-lg"> About us </NavLink>
                             </li>
                             <li>
-                                <NavLink to={'/contact'} className="text-base font-medium hover:!bg-primary-hover hover:text-white py-2 px-4 rounded-lg"> Contact us </NavLink>
+                                <NavLink to={'/contact-us'} className="text-base font-medium hover:!bg-primary-hover hover:text-white py-2 px-4 rounded-lg"> Contact us </NavLink>
                             </li>
                         </ul>
                     </nav>
@@ -80,13 +80,13 @@ const Header = () => {
                                         <NavLink to={'/'} className="text-base font-medium hover:!bg-primary-hover hover:text-white py-3 px-4 rounded-lg block"> Home </NavLink>
                                     </li>
                                     <li className="py-2">
-                                        <NavLink to={'/biodata'} className="text-base font-medium hover:!bg-primary-hover hover:text-white py-3 px-4 rounded-lg block"> Biodatas </NavLink>
+                                        <NavLink to={'/biodatas'} className="text-base font-medium hover:!bg-primary-hover hover:text-white py-3 px-4 rounded-lg block"> Biodatas </NavLink>
                                     </li>
                                     <li className="py-2">
-                                        <NavLink to={'/about'} className="text-base font-medium hover:!bg-primary-hover hover:text-white py-3 px-4 rounded-lg block"> About us </NavLink>
+                                        <NavLink to={'/about-us'} className="text-base font-medium hover:!bg-primary-hover hover:text-white py-3 px-4 rounded-lg block"> About us </NavLink>
                                     </li>
                                     <li className="py-2">
-                                        <NavLink to={'/contact'} className="text-base font-medium hover:!bg-primary-hover hover:text-white py-3 px-4 rounded-lg block"> Contact us </NavLink>
+                                        <NavLink to={'/contact-us'} className="text-base font-medium hover:!bg-primary-hover hover:text-white py-3 px-4 rounded-lg block"> Contact us </NavLink>
                                     </li>
                                     <div className="pl-4">
                                         <SocialWidget />

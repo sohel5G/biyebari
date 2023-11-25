@@ -7,6 +7,17 @@ import Login from "../pages/Login/Login";
 import DashboardLayout from "../pages/Layouts/DashboardLayout";
 import AdminDashboard from "../pages/Dashboard/Admin/AdminDashboard";
 import ClientsDashboard from "../pages/Dashboard/Clients/ClientsDashboard";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
+import ApprovedPremium from "../pages/Dashboard/Admin/ApprovedPremium";
+import ApprovedContactRequest from "../pages/Dashboard/Admin/ApprovedContactRequest";
+import EditBiodata from "../pages/Dashboard/Clients/EditBiodata";
+import ViewBiodata from "../pages/Dashboard/Clients/ViewBiodata";
+import ContactRequest from "../pages/Dashboard/Clients/ContactRequest";
+import MyFavourites from "../pages/Dashboard/Clients/MyFavourites";
+import Logout from "../pages/Dashboard/Clients/Logout";
+import Biodatas from "../pages/Biodatas/Biodatas";
+import AboutUs from "../pages/About/AboutUs";
+import ContactUs from "../pages/Contact/ContactUs";
 
 const router = createBrowserRouter([
     {
@@ -19,11 +30,23 @@ const router = createBrowserRouter([
                 element: <Home />
             },
             {
-                path: '/register',
+                path: 'biodatas',
+                element: <Biodatas />
+            },
+            {
+                path: 'about-us',
+                element: <AboutUs />
+            },
+            {
+                path: 'contact-us',
+                element: <ContactUs />
+            },
+            {
+                path: 'register',
                 element: <Register />
             },
             {
-                path: '/login',
+                path: 'login',
                 element: <Login />
             }
         ]
@@ -34,16 +57,24 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
 
+
             // Admin routes 
             {
                 path: 'admin',
                 element: <AdminDashboard />
             },
-
-
-
-
-
+            {
+                path: 'users',
+                element:<ManageUsers/>
+            },
+            {
+                path: 'premium',
+                element:<ApprovedPremium/>
+            },
+            {
+                path: 'requested',
+                element:<ApprovedContactRequest/>
+            },
 
 
 
@@ -53,6 +84,26 @@ const router = createBrowserRouter([
             {
                 path: 'client',
                 element: <ClientsDashboard />
+            },
+            {
+                path: 'add',
+                element: <EditBiodata />
+            },
+            {
+                path: 'view',
+                element: <ViewBiodata />
+            },
+            {
+                path: 'request',
+                element: <ContactRequest />
+            },
+            {
+                path: 'favourite',
+                element: <MyFavourites />
+            },
+            {
+                path: 'logout',
+                element: <Logout />
             },
 
 

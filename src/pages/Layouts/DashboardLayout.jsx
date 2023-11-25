@@ -5,6 +5,7 @@ import "./DashboardLayout.css";
 import AdminRoutes from "../Dashboard/Routes/AdminRoutes";
 import ClientRoutes from "../Dashboard/Routes/ClientRoutes";
 import PublicRoutes from "../Dashboard/Routes/PublicRoutes";
+import { Outlet } from "react-router-dom";
 
 const DashboardLayout = () => {
     const [showSidebar, setShowSidebar] = useState(window.innerWidth >= 1024);
@@ -61,7 +62,7 @@ const DashboardLayout = () => {
                         {/* Sidebar content */}
                         <div>
                             <ul className="dashboard-menu mt-20 pb-10">
-                                
+
                                 <AdminRoutes/>
 
                                 <hr className="my-8" />
@@ -82,7 +83,7 @@ const DashboardLayout = () => {
 
                 {/*Dashboard Content here */}
                 <div className='lg:col-span-3 p-4'>
-                    <h1 className="text-3xl">This is dashboard <br /> content area </h1>
+                    <Outlet/>
                 </div>
 
             </div>
