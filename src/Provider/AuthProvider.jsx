@@ -81,7 +81,7 @@ const Authprovider = ({ children }) => {
         userUpdateOnSignUp,
         name: 'Abdullah al araf'
     }
-    console.log('user in the authState:', user);
+    // console.log('user in the authState:', user);
     return (
         <>
             <AllContext.Provider value={allInfo}>
