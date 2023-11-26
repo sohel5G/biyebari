@@ -19,10 +19,10 @@ const Header = () => {
             <Container>
 
                 {/* Main nav bar */}
-                <div className="navigation flex justify-between gap-5 items-center py-4">
+                <div className="navigation flex justify-between gap-3 items-center py-4">
                     <div className="block lg:hidden">
                         <button onClick={() => setHeaderNavDrawer(!headerNavDrawer)} className="bg-primary-normal hover:bg-primary-hover py-2 px-3 text-white rounded-lg text-xl flex items-center gap-1">
-                            <LuMenu /> <span className="text-base font-medium">Menu</span>
+                            <LuMenu /> 
                         </button>
                     </div>
                     <div>
@@ -47,7 +47,11 @@ const Header = () => {
                     <div>
                         {
                             loading ?
-                                <LoaderIcon /> :
+                                <div className="flex justify-start">
+                                    <span className="w-[53px] h-2"></span>
+                                    <LoaderIcon />
+                                    <span className="w-[53px] h-2"></span>
+                                </div> :
                                 user ?
                                     <Button text="Dashboard" link="/dashboard" /> :
                                     <Button text="Login" link="/login" />

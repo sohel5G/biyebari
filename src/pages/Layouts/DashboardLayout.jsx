@@ -39,7 +39,7 @@ const DashboardLayout = () => {
 
             {/* Open button on mobile screen */}
             <div className="lg:hidden flex justify-center my-3">
-                <button onClick={toggleSidebar} className="hover:bg-primary-normal py-1 px-5 text-primary-normal hover:text-white rounded border-2 border-primary-normal text-xl flex items-center gap-1">
+                <button onClick={toggleSidebar} className="hover:bg-primary-normal py-1 px-4 text-primary-normal hover:text-white rounded border-2 border-primary-normal text-xl flex items-center gap-1">
                     <LuMenu /> <span className="text-base font-medium">Dashboard</span>
                 </button>
             </div>

@@ -18,6 +18,7 @@ import Logout from "../pages/Dashboard/Clients/Logout";
 import Biodatas from "../pages/Biodatas/Biodatas";
 import AboutUs from "../pages/About/AboutUs";
 import ContactUs from "../pages/Contact/ContactUs";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout />,
+        element: <PrivateRoute> <DashboardLayout /> </PrivateRoute>,
         errorElement: <ErrorPage />,
         children: [
 
