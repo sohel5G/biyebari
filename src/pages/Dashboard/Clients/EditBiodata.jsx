@@ -11,10 +11,9 @@ const EditBiodata = () => {
 
     const axiosSecure = useAxiosSecure();
 
-
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = async (data) => {
-        setLoadingIcon(true)
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const onSubmit = (data) => {
+        setLoadingIcon(true);
 
         const biodata = {
             age: data.age,
@@ -40,23 +39,33 @@ const EditBiodata = () => {
             fathersName: data.fathersName,
         }
 
-        const response = await axiosSecure.post('/biodatas', biodata);
-            if (response.data.insertedId) {
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: `Biodata added successfully`,
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-                // reset();
+        axiosSecure.post('/biodatas', biodata)
+            .then(response => {
+                if (response.data.insertedId) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: `Biodata added successfully`,
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                    reset();
+                    setLoadingIcon(false);
+                }
 
-                setLoadingIcon(false)
-            }
-
-        console.log(response.data);
-        setLoadingIcon(false)
-        
+            }).catch((error)=>{
+                if(error.message){
+                    Swal.fire({
+                        position: "center",
+                        icon: "warning",
+                        title: error.message,
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                }
+                setLoadingIcon(false);
+            })
+            
     }
 
 
@@ -125,7 +134,7 @@ const EditBiodata = () => {
                             </div>
                             <div className="w-full">
                                 <label htmlFor="inches" className="block mb-2 text-sm font-medium text-gray-900 cursor-pointer">inches*</label>
-                                <select id="inches" {...register("inches", { required: true })}
+                                <select id="inches" {...register("inches")}
                                     className="bg-gray-50 border border-gray-300 text-base rounded-lg block w-full p-2.5"
                                 >
                                     <option value="">-</option>
@@ -141,7 +150,6 @@ const EditBiodata = () => {
                                     <option value="10">10 inc</option>
                                     <option value="11">11 inc</option>
                                 </select>
-                                {errors?.inches && <span className="text-red-500"> inches is required</span>}
                             </div>
                         </div>
 
@@ -329,7 +337,7 @@ const EditBiodata = () => {
                             </div>
                             <div className="w-full">
                                 <label htmlFor="expectedPartnerInches" className="block mb-2 text-xs font-medium text-gray-900 cursor-pointer">Expected partner inches*</label>
-                                <select id="expectedPartnerInches" {...register("expectedPartnerInches", { required: true })}
+                                <select id="expectedPartnerInches" {...register("expectedPartnerInches")}
                                     className="bg-gray-50 border border-gray-300 text-base rounded-lg block w-full p-2.5"
                                 >
                                     <option value="">-</option>
@@ -345,7 +353,6 @@ const EditBiodata = () => {
                                     <option value="10">10 inc</option>
                                     <option value="11">11 inc</option>
                                 </select>
-                                {errors?.expectedPartnerInches && <span className="text-red-500 text-xs"> Expected partner inches is required</span>}
                             </div>
                         </div>
 
