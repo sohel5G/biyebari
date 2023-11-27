@@ -9,7 +9,7 @@ import useStoreFavorite from "../../hooks/useStoreFavorite";
 
 const BiodataDetails = () => {
     const { id } = useParams();
-    const [singleBiodata, , isSingleBiodataLoading] = useSingleBiodataById(id)
+    const [singleBiodata, , isSingleBiodataLoading] = useSingleBiodataById(id);
     const [typeBiodatas, refetchTypeBiodatas, isTypeBiodataLoading] = useTypeBiodatas(singleBiodata?.type);
 
     const handleStoreFavorite = useStoreFavorite()

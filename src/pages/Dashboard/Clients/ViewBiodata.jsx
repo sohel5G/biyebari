@@ -1,33 +1,77 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useSingleBiodataById from "../../../hooks/useSingleBiodataById";
 import LoaderIcon from "../../Utils/LoaderIcon";
+import Swal from "sweetalert2";
+import useSelfUser from "../../../hooks/useSelfUser";
+import useSelfBiodata from "../../../hooks/useSelfBiodata";
 
 const ViewBiodata = () => {
     const axiosSecure = useAxiosSecure();
-    const {user} = useAuth();
+    const { user } = useAuth();
+    const { selfUser, refetchSelfUser } = useSelfUser();
+    const { selfBiodata, refetchSelfBiodata } = useSelfBiodata();
 
-    const id = '656329c5f714ade3e9d5b62f';
-    const [singleBiodata, , isSingleBiodataLoading] = useSingleBiodataById(id)
-
-    const { isPending, error, data } = useQuery({
-
-        queryKey: ['repoData'],
-        queryFn: async() => {
+    const { isPending, data: singleBiodata = {} } = useQuery({
+        queryKey: ['ownBiodata'],
+        queryFn: async () => {
             const res = await axiosSecure(`/biodata/own/${user?.email}`);
-            return res;
+            return res.data;
         }
-
     })
+    
+    const handleRequestForPro = () => {
 
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to make premium biodata",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes Please"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.put(`/request/user/to-pro/${user?.email}`)
+                    .then(res => {
+
+                        if (res.data.resultForUser.modifiedCount > 0 && res.data.resultForBiodata.modifiedCount > 0) {
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: `Request send for admin approve`,
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                        }
+                        refetchSelfUser();
+                        refetchSelfBiodata();
+
+                    }).catch((error) => {
+                        if (error.message) {
+                            Swal.fire({
+                                position: "center",
+                                icon: "warning",
+                                title: error.message,
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                        }
+                        refetchSelfUser();
+                        refetchSelfBiodata();
+                    })
+            }
+        });
+
+    }
 
     return (
         <div className="container mx-auto px-2 flex justify-center my-4">
 
             <div className="w-96 shadow p-5 pb-6  mt-5">
                 {
-                    isSingleBiodataLoading ?
+                    isPending ?
 
                         <div className="flex justify-center items-center h-96">
                             <div> <LoaderIcon /> </div>
@@ -66,7 +110,26 @@ const ViewBiodata = () => {
                             <p className="py-2 flex justify-between border-b"><span className="font-medium">Mobile :</span> {singleBiodata?.mobile}</p>
                             <p className="py-2 flex justify-between border-b"><span className="font-medium">Email :</span> {singleBiodata?.email}</p>
 
-                            <button className="py-2 px-3 text-base mt-10 rounded bg-primary-normal text-white">Make Your Biodata premium</button>
+
+                            {
+                                selfUser?.isPro === 'Pending' && selfBiodata?.isPro === 'Pending' ?
+                                    <>
+                                        <button className="py-2 px-3 text-base mt-10 rounded bg-gray-400 text-white">Premium request pending</button>
+                                    </> :
+                                    <>
+                                        {
+                                            selfUser?.isPro === 'Premium' && selfBiodata?.isPro === 'Premium' ?
+                                                <>
+                                                    <button className="py-2 px-3 text-base mt-10 rounded bg-sky-500 text-white">Your biodata is premium</button>
+                                                </> :
+                                                <>
+                                                    <button onClick={handleRequestForPro} className="py-2 px-3 text-base mt-10 rounded bg-primary-normal text-white">Make Your Biodata premium</button>
+                                                </>
+                                        }
+                                    </>
+                            }
+
+
 
                         </div>
                 }
