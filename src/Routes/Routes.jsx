@@ -19,6 +19,7 @@ import Biodatas from "../pages/Biodatas/Biodatas";
 import AboutUs from "../pages/About/AboutUs";
 import ContactUs from "../pages/Contact/ContactUs";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import BiodataDetails from "../pages/Biodatas/BiodataDetails";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path: 'contact-us',
                 element: <ContactUs />
+            },
+            {
+                path: '/biodata/:id',
+                element: <BiodataDetails/>
             },
             {
                 path: 'register',

@@ -60,7 +60,7 @@ const Biodatas = () => {
 
 
     return (
-        <div className="container mx-auto px-5 grid lg:grid-cols-6 lg:gap-3">
+        <div className="container mx-auto px-5 grid lg:grid-cols-4 lg:gap-3">
             <div className="border-b-2 lg:border-b-0 lg:border-r bg-[#ffffffc2]">
 
 
@@ -101,7 +101,7 @@ const Biodatas = () => {
                     </h3>
                     <div>
                         <div className="range">
-                            <h1 className="flex justify-between font-medium text-sm max-w-[160px] mx-auto mb-5">
+                            <h1 className="flex justify-between font-medium text-sm max-w-[260px] mx-auto mb-5">
                                 <span>Min {minValue}</span>  <span>TO</span> <span>Max {maxValue}</span>
                             </h1>
                             <MultiRangeSlider
@@ -307,9 +307,9 @@ const Biodatas = () => {
                 </div>
             </div>
 
-            <div className="lg:col-span-5">
-                <h1 className="text-2xl text-left pt-5 flex gap-2">
-                    Total Biodatas {isBiodataLoading ? <LoaderIcon /> : biodatas?.length}
+            <div className="lg:col-span-3">
+                <h1 className="text-2xl text-left pt-5 flex gap-2 items-center">
+                    Total Biodatas {isBiodataLoading ? <div className="w-5 h-5 mt-1"><LoaderIcon /></div> : biodatas?.length}
                 </h1>
 
                 {
