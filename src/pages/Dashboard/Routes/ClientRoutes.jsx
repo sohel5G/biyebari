@@ -16,7 +16,7 @@ const ClientRoutes = () => {
             <li>
                 <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2" to={'/dashboard/add'}>
                     <span className="text-xl mt-1"><FaEdit /></span>
-                    <span>Edit Biodata</span>
+                    <span>Add/Edit Biodata</span>
                 </NavLink>
             </li>
 

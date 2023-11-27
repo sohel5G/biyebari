@@ -3,12 +3,13 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import LoaderIcon from "../../Utils/LoaderIcon";
 import { MdDelete } from "react-icons/md";
+import Swal from "sweetalert2";
 
 const MyFavourites = () => {
     const axiosSecure = useAxiosSecure()
     const {user} = useAuth();
 
-    const { data: favoritesItems = [], isPending } = useQuery({
+    const { data: favoritesItems = [], refetch, isPending } = useQuery({
         queryKey: ['favoritesItems'],
         queryFn: async () => {
             const res = await axiosSecure(`/favorites/${user.email}`);
@@ -17,7 +18,33 @@ const MyFavourites = () => {
            
     })
 
-    console.log(favoritesItems);
+    const handleDeleteFavorite = itemId => {
+        axiosSecure.delete(`/favorites/${itemId}`)
+            .then(response => {
+                if (response.data.deletedCount > 0) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: `One favorites removed`,
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                    refetch();
+                }
+
+            }).catch((error) => {
+                if (error.message) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "warning",
+                        title: error.message,
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                }
+            })
+
+    }
 
     return (
         <div>
@@ -76,7 +103,7 @@ const MyFavourites = () => {
                                                         <td className="px-6 py-4">{item?.permanentDivision}</td>
                                                         <td className="px-6 py-4">{item?.occupation}</td>
                                                         <td className="px-6 py-4 text-right">
-                                                            <button className="font-medium text-primary-normal text-lg" ><MdDelete /></button>
+                                                            <button onClick={() => handleDeleteFavorite(item._id)} className="font-medium text-primary-normal text-lg" ><MdDelete /></button>
                                                         </td>
                                                     </tr>)
                                                 }
