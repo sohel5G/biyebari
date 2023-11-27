@@ -8,35 +8,51 @@ const ApprovedPremium = () => {
 
     const axiosSecure = useAxiosSecure();
 
-    const handleApprovedPremium = itemId => {
-        axiosSecure.delete(`/favorites/${itemId}`)
-            .then(response => {
-                if (response.data.deletedCount > 0) {
-                    Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: `One favorites removed`,
-                        showConfirmButton: false,
-                        timer: 3000
-                    });
-                    refetchUsersForApprovedPremium();
-                }
+    const handleApprovedPremium = (userEmail) => {
 
-            }).catch((error) => {
-                if (error.message) {
-                    Swal.fire({
-                        position: "center",
-                        icon: "warning",
-                        title: error.message,
-                        showConfirmButton: false,
-                        timer: 3000
-                    });
-                }
-            })
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to make this biodata premium",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.put(`/approved/user/to-premium/${userEmail}`)
+                    .then(res => {
+
+                        if (res.data.resultForUser.modifiedCount > 0 && res.data.resultForBiodata.modifiedCount > 0) {
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: `Approved`,
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                        }
+                        refetchUsersForApprovedPremium();
+
+                    }).catch((error) => {
+                        if (error.message) {
+                            Swal.fire({
+                                position: "center",
+                                icon: "warning",
+                                title: error.message,
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                        }
+                        refetchUsersForApprovedPremium();
+                    })
+            }
+        });
 
     }
 
-    console.log(usersForApprovedPremium);
+
 
     return (
         <div>
@@ -91,7 +107,7 @@ const ApprovedPremium = () => {
                                                             <td className="px-6 py-4">{item?.email}</td>
                                                             <td className="px-6 py-4">#0{item?.biodataId}</td>
                                                             <td className="px-6 py-4 text-right">
-                                                                <button onClick={() => handleApprovedPremium(item._id)} className="font-medium text-primary-normal text-lg" > Make Premium </button>
+                                                                <button onClick={() => handleApprovedPremium(item?.email)} className="font-medium text-primary-normal text-lg" > Make Premium </button>
                                                             </td>
                                                         </tr>)
                                                     }

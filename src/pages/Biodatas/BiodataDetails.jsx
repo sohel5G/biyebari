@@ -6,19 +6,22 @@ import useTypeBiodatas from "../../hooks/useTypeBiodatas";
 import useSingleBiodataById from "../../hooks/useSingleBiodataById";
 import { MdFavoriteBorder } from "react-icons/md";
 import useStoreFavorite from "../../hooks/useStoreFavorite";
+import useSelfUser from "../../hooks/useSelfUser";
 
 const BiodataDetails = () => {
     const { id } = useParams();
     const [singleBiodata, , isSingleBiodataLoading] = useSingleBiodataById(id);
     const [typeBiodatas, refetchTypeBiodatas, isTypeBiodataLoading] = useTypeBiodatas(singleBiodata?.type);
 
+    const { selfUser, refetchSelfUser } = useSelfUser();
+
     const handleStoreFavorite = useStoreFavorite()
 
     useEffect(() => {
         refetchTypeBiodatas()
-    }, [singleBiodata?.type, refetchTypeBiodatas])
+    }, [singleBiodata?.type, refetchTypeBiodatas, refetchSelfUser])
 
-   
+    console.log(selfUser.isPro)
 
     return (
         <div className="container mx-auto px-5 grid lg:grid-cols-4 lg:gap-3">
@@ -38,7 +41,7 @@ const BiodataDetails = () => {
                         </div>
                     </div>
                     <h1 className="font-medium text-xl py-2 border-b border-primary-normal text-center"><span className="font-bold">ID: </span> #0{singleBiodata?.biodataId}</h1>
-                    
+
                     <p className="py-1 pt-3"><span className="font-medium">Age :</span> {singleBiodata?.age}</p>
                     <p className="py-1"><span className="font-medium">Date Of Birth :</span> {singleBiodata?.birth}</p>
                     <p className="py-1"><span className="font-medium">Gender :</span> {singleBiodata?.type}</p>
@@ -61,13 +64,21 @@ const BiodataDetails = () => {
 
                     <h1 className="text-base font-medium text-primary-normal border-t border-b py-2 mt-6 mb-2">Contact Info</h1>
 
-                    <div>
-                        <p className="py-1"><span className="font-medium">Name :</span> {singleBiodata?.name}</p>
-                        <p className="py-1"><span className="font-medium">Mobile :</span> {singleBiodata?.mobile}</p>
-                        <p className="py-1"><span className="font-medium">Email :</span> {singleBiodata?.email}</p>
-                    </div>
 
-                    <button className="py-1 px-3 text-sm rounded-md bg-primary-normal text-white">Contact request</button>
+
+                    {
+                        selfUser.isPro === 'Premium' ?
+                            <>
+                                <p className="py-1"><span className="font-medium">Name :</span> {singleBiodata?.name}</p>
+                                <p className="py-1"><span className="font-medium">Mobile :</span> {singleBiodata?.mobile}</p>
+                                <p className="py-1"><span className="font-medium">Email :</span> {singleBiodata?.email}</p>
+                            </> : 
+                            <>
+                                <button className="py-2 px-3 mt-5 text-sm rounded bg-primary-normal text-white">Request for contact info</button>
+                            </>
+                    }
+
+                    
 
                 </div>
 
