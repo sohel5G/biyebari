@@ -11,7 +11,7 @@ const EditBiodata = () => {
 
     const axiosSecure = useAxiosSecure();
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => {
         setLoadingIcon(true);
 
@@ -49,7 +49,6 @@ const EditBiodata = () => {
                         showConfirmButton: false,
                         timer: 3000
                     });
-                    reset();
                     setLoadingIcon(false);
                 }
 
@@ -235,7 +234,6 @@ const EditBiodata = () => {
                                 <option value="Engineer"> Engineer </option>
                                 <option value="Artist"> Artist </option>
                                 <option value="Banker"> Banker </option>
-                                <option value="Artist"> Artist </option>
                                 <option value="Artist"> Artist </option>
                             </select>
                             {errors?.occupation && <span className="text-red-500"> Occupation is required</span>}

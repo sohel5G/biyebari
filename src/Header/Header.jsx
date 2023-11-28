@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "../pages/Utils/Container";
 import { LuMenu } from "react-icons/lu";
 import { MdClose } from "react-icons/md";
@@ -9,11 +9,17 @@ import Logo from "../pages/Utils/Logo";
 import { NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import LoaderIcon from "../pages/Utils/LoaderIcon";
+import useSelfUser from "../hooks/useSelfUser";
 
 const Header = () => {
     const [headerNavDrawer, setHeaderNavDrawer] = useState(false);
+    const { selfUser, refetchSelfUser, isLoadingSelfUser } = useSelfUser();
     const { user, loading } = useAuth();
 
+    useEffect(() => {
+        refetchSelfUser()
+    }, [loading, user, refetchSelfUser])
+    
     return (
         <header className="bg-slate-50 border-b border-b-slate-200 z-50">
             <Container>
@@ -22,7 +28,7 @@ const Header = () => {
                 <div className="navigation flex justify-between gap-3 items-center py-4">
                     <div className="block lg:hidden">
                         <button onClick={() => setHeaderNavDrawer(!headerNavDrawer)} className="bg-primary-normal hover:bg-primary-hover py-2 px-3 text-white rounded-lg text-xl flex items-center gap-1">
-                            <LuMenu /> 
+                            <LuMenu />
                         </button>
                     </div>
                     <div>
@@ -47,14 +53,44 @@ const Header = () => {
                     <div>
                         {
                             loading ?
-                                <div className="flex justify-start">
-                                    <span className="w-[53px] h-2"></span>
-                                    <LoaderIcon />
-                                    <span className="w-[53px] h-2"></span>
-                                </div> :
-                                user ?
-                                    <Button text="Dashboard" link="/dashboard" /> :
-                                    <Button text="Login" link="/login" />
+                                <>
+                                    <div className="flex justify-start">
+                                        <span className="w-[53px] h-2"></span>
+                                        <LoaderIcon />
+                                        <span className="w-[53px] h-2"></span>
+                                    </div>
+                                </> :
+                                <>
+                                    {
+                                        isLoadingSelfUser ?
+                                            <>
+                                                <div className="flex justify-start">
+                                                    <span className="w-[53px] h-2"></span>
+                                                    <LoaderIcon />
+                                                    <span className="w-[53px] h-2"></span>
+                                                </div>
+                                            </> :
+                                            <>
+                                                {
+                                                    user ?
+                                                        <>
+                                                            {
+                                                                selfUser?.userRole === 'Admin' ?
+                                                                    <>
+                                                                        <Button text="Dashboard" link="/dashboard/admin" />
+                                                                    </> :
+                                                                    <>
+                                                                        <Button text="Dashboard" link="/dashboard/client" />
+                                                                    </>
+                                                            }
+                                                        </> :
+                                                        <>
+                                                            <Button text="Login" link="/login" />
+                                                        </>
+                                                }
+                                            </>
+                                    }
+                                </>
                         }
                     </div>
                 </div>

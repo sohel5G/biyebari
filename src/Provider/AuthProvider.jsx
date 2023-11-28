@@ -14,6 +14,9 @@ const Authprovider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    
+    
+
     const googleSignInWithPopup = () => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider)
@@ -78,8 +81,7 @@ const Authprovider = ({ children }) => {
         registerUser,
         userLogIn,
         userlogOut,
-        userUpdateOnSignUp,
-        name: 'Abdullah al araf'
+        userUpdateOnSignUp
     }
     // console.log('user in the authState:', user);
     return (

@@ -6,7 +6,7 @@ const useSelfUser = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
-    const { data: selfUser = {}, refetch: refetchSelfUser } = useQuery({
+    const { data: selfUser = {}, refetch: refetchSelfUser, isPending: isLoadingSelfUser } = useQuery({
         queryKey: ['selfUser'],
         queryFn: async () => {
             const res = await axiosSecure(`/user/self/${user?.email}`)
@@ -14,7 +14,7 @@ const useSelfUser = () => {
         }
     })
 
-    return { selfUser, refetchSelfUser }
+    return { selfUser, refetchSelfUser, isLoadingSelfUser }
 };
 
 export default useSelfUser;

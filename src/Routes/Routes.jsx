@@ -20,6 +20,7 @@ import AboutUs from "../pages/About/AboutUs";
 import ContactUs from "../pages/Contact/ContactUs";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import BiodataDetails from "../pages/Biodatas/BiodataDetails";
+import AdminRoutes from "../PrivateRoute/AdminRoutes";
 
 const router = createBrowserRouter([
     {
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/biodata/:id',
-                element: <BiodataDetails/>
+                element: <PrivateRoute> <BiodataDetails /> </PrivateRoute>
             },
             {
                 path: 'register',
@@ -59,7 +60,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <PrivateRoute> <DashboardLayout /> </PrivateRoute>,
+        element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
         errorElement: <ErrorPage />,
         children: [
 
@@ -67,19 +68,19 @@ const router = createBrowserRouter([
             // Admin routes 
             {
                 path: 'admin',
-                element: <AdminDashboard />
+                element: <AdminRoutes> <AdminDashboard /> </AdminRoutes>
             },
             {
                 path: 'users',
-                element:<ManageUsers/>
+                element: <AdminRoutes> <ManageUsers/> </AdminRoutes>
             },
             {
                 path: 'premium',
-                element:<ApprovedPremium/>
+                element: <AdminRoutes> <ApprovedPremium /> </AdminRoutes> 
             },
             {
                 path: 'requested',
-                element:<ApprovedContactRequest/>
+                element: <AdminRoutes> <ApprovedContactRequest /> </AdminRoutes>
             },
 
 

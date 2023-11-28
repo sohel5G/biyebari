@@ -6,9 +6,11 @@ import AdminRoutes from "../Dashboard/Routes/AdminRoutes";
 import ClientRoutes from "../Dashboard/Routes/ClientRoutes";
 import PublicRoutes from "../Dashboard/Routes/PublicRoutes";
 import { Outlet } from "react-router-dom";
+import useSelfUser from "../../hooks/useSelfUser";
 
 const DashboardLayout = () => {
     const [showSidebar, setShowSidebar] = useState(window.innerWidth >= 1024);
+    const { selfUser } = useSelfUser();
 
     // Function to toggle sidebar visibility
     const toggleSidebar = () => {
@@ -63,19 +65,22 @@ const DashboardLayout = () => {
                         <div>
                             <ul className="dashboard-menu mt-20 pb-10">
 
-                                <AdminRoutes/>
+                                {
+                                    selfUser?.userRole === 'Admin' ?
+                                        <>
+                                            <AdminRoutes />
+                                        </> :
+                                        <>
+                                            <ClientRoutes />
+                                        </>
+                                }
 
                                 <hr className="my-8" />
 
-                                <ClientRoutes/>
-
-                                <hr className="my-8" />
-
-                                <PublicRoutes/>
+                                <PublicRoutes />
 
                             </ul>
                         </div>
-
 
                     </div>
                 </div>
@@ -83,7 +88,7 @@ const DashboardLayout = () => {
 
                 {/*Dashboard Content here */}
                 <div className='lg:col-span-3 p-4'>
-                    <Outlet/>
+                    <Outlet />
                 </div>
 
             </div>
