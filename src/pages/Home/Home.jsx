@@ -13,7 +13,6 @@ import Slider from "./Slider/Slider";
 import Button from "../Utils/Button";
 
 const Home = () => {
-
     const [filterData] = usePremumBiodatas();
     
     return (

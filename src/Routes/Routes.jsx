@@ -91,7 +91,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'stories',
-                element:<SuccessStory/>
+                element: <AdminRoutes> <SuccessStory /> </AdminRoutes>
             },
 
 

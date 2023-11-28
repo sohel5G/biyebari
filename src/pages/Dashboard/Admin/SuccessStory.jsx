@@ -1,23 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoaderIcon from "../../Utils/LoaderIcon";
 import Swal from "sweetalert2";
+import useStories from "../../../hooks/useStories";
 
 const SuccessStory = () => {
-    const axiosSecure = useAxiosSecure()
-    const { data: successStories = [], isPending } = useQuery({
-        queryKey: ['successStories'],
-        queryFn: async () => {
-            const res = await axiosSecure('/get-success-stories')
-            return res.data;
-        }
-    })
+
+    const { stories, isStoriesLoading } = useStories()
 
     return (
         <div>
             <div>
                 <h1 className="text-2xl text-left py-5 flex gap-2 items-center">
-                    Total Success Stories {isPending ? <div className="w-5 h-5 mt-1"><LoaderIcon /></div> : successStories?.length}
+                    Total Success Stories {isStoriesLoading ? <div className="w-5 h-5 mt-1"><LoaderIcon /></div> : stories?.length}
                 </h1>
 
                 <div className="relative overflow-x-auto border sm:rounded-lg">
@@ -38,7 +31,7 @@ const SuccessStory = () => {
                         <tbody>
 
                             {
-                                isPending ?
+                                isStoriesLoading ?
                                     <>
                                         <tr>
                                             <td className="h-20 w-full flex items-center justify-center">
@@ -48,7 +41,7 @@ const SuccessStory = () => {
                                     </> :
                                     <>
                                         {
-                                            successStories <= 0 ?
+                                            stories <= 0 ?
                                                 <>
                                                     <tr>
                                                         <td className="h-20 w-full flex items-center justify-center">
@@ -58,7 +51,7 @@ const SuccessStory = () => {
                                                 </> :
                                                 <>
                                                     {
-                                                        successStories.map(item => <tr key={item._id} className="bg-white hover:bg-gray-50 border-b ">
+                                                        stories.map(item => <tr key={item._id} className="bg-white hover:bg-gray-50 border-b ">
                                                             <td className="px-6 py-4">#0{item?.selfId}</td>
                                                             <td className="px-6 py-4">#0{item?.partnerId}</td>
                                                             <td className="px-6 py-4">
