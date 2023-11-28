@@ -13,7 +13,7 @@ const CheckoutForm = () => {
     const elements = useElements();
 
     const axiosSecure = useAxiosSecure();
-    const totalPrice = 500;
+    const totalPrice = 0;
 
     useEffect(() => {
         if (totalPrice > 0) {

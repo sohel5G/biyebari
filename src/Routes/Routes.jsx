@@ -58,7 +58,7 @@ const router = createBrowserRouter([
                 element: <Login />
             },
             {
-                path: 'checkout',
+                path: 'checkout/:id',
                 element: <PrivateRoute> <Payment /> </PrivateRoute>
             }
         ]

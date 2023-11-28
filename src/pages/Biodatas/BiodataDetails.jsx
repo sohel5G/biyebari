@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import LoaderIcon from "../Utils/LoaderIcon";
 import { useEffect } from "react";
 import useTypeBiodatas from "../../hooks/useTypeBiodatas";
@@ -21,7 +21,7 @@ const BiodataDetails = () => {
         refetchTypeBiodatas()
     }, [singleBiodata?.type, refetchTypeBiodatas, refetchSelfUser])
 
-    
+
 
     return (
         <div className="container mx-auto px-5 grid lg:grid-cols-4 lg:gap-3">
@@ -72,13 +72,15 @@ const BiodataDetails = () => {
                                 <p className="py-1"><span className="font-medium">Name :</span> {singleBiodata?.name}</p>
                                 <p className="py-1"><span className="font-medium">Mobile :</span> {singleBiodata?.mobile}</p>
                                 <p className="py-1"><span className="font-medium">Email :</span> {singleBiodata?.email}</p>
-                            </> : 
+                            </> :
                             <>
-                                <button className="py-2 px-3 mt-5 text-sm rounded bg-primary-normal text-white">Request for contact info</button>
+                                <Link to={`/checkout/${singleBiodata?._id}`}>
+                                    <button className="py-2 px-3 mt-5 text-sm rounded bg-primary-normal text-white">Request for contact info</button>
+                                </Link>
                             </>
                     }
 
-                    
+
 
                 </div>
 

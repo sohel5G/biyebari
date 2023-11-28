@@ -6,7 +6,7 @@ const useSelfBiodata = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
-    const { data: selfBiodata = {}, refetch: refetchSelfBiodata } = useQuery({
+    const { data: selfBiodata = {}, refetch: refetchSelfBiodata, isPending: isLoadingSelfBiodata} = useQuery({
         queryKey: ['selfBiodata'],
         queryFn: async () => {
             const res = await axiosSecure(`/biodata/own/${user?.email}`)
@@ -14,7 +14,7 @@ const useSelfBiodata = () => {
         }
     })
 
-    return { selfBiodata, refetchSelfBiodata }
+    return { selfBiodata, refetchSelfBiodata, isLoadingSelfBiodata }
 };
 
 export default useSelfBiodata;
