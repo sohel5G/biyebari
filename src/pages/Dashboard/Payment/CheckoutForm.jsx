@@ -1,26 +1,31 @@
+import PropTypes from 'prop-types';
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ newItem }) => {
     const [error, setError] = useState('');
     const [clientSecret, setClientSecret] = useState('');
     const [transactionId, setTransactionId] = useState('');
     const { user } = useAuth();
 
+    const navigate = useNavigate();
+
     const stripe = useStripe();
     const elements = useElements();
 
     const axiosSecure = useAxiosSecure();
-    const totalPrice = 0;
+    const totalPrice = 500;
 
     useEffect(() => {
         if (totalPrice > 0) {
             axiosSecure.post('/create-stripe-payment-intent', { price: totalPrice })
                 .then(res => {
                     setClientSecret(res.data.clientSecret);
-                    console.log('Client secret from the server side', res.data.clientSecret);
+                    // console.log('Client secret from the server side', res.data.clientSecret);
                 })
         }
     }, [axiosSecure, totalPrice])
@@ -66,36 +71,26 @@ const CheckoutForm = () => {
 
         } else {
 
-            console.log('Confirm Payment Intent', paymentIntent);
+            // console.log('Confirm Payment Intent', paymentIntent);
 
             if (paymentIntent.status === 'succeeded') {
-                console.log('Transaction Id : ', paymentIntent.id);
+                // console.log('Transaction Id : ', paymentIntent.id);
                 setTransactionId(paymentIntent.id);
 
-
-                // Store payment info in the data base.
-                const payment = {
-                    userEmail: user?.email,
-                    totalPrice,
-                    transactionId: paymentIntent.id,
-                    date: new Date(), // utc date convert, use moment js to do it
-                    
+                const response = await axiosSecure.post('/users/post-contact-request', newItem);
+                // console.log(response.data);
+                if (response.data.insertedId) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Payment done, Request send Successfully",
+                        showConfirmButton: false,
+                        timer: 20000
+                    });
+                    navigate('/dashboard/request');
                 }
 
-                // const response = await axiosSecure.post('/payment-done', payment);
-                // console.log(response.data);
-                // if (response.data.paymentResult.insertedId) {
-                //     Swal.fire({
-                //         position: "center",
-                //         icon: "success",
-                //         title: "Request send, your payment done",
-                //         showConfirmButton: false,
-                //         timer: 5000
-                //     });
-                //     navigate('/dashboard/reservation');
-                // }
-
-                console.log('Payment info', payment);
+                // console.log('newItem', newItem);
 
             }
         }
@@ -112,7 +107,7 @@ const CheckoutForm = () => {
                                 fontSize: '18px',
                                 color: '#424770',
                                 '::placeholder': {
-                                    color: '#aab7c4',
+                                    color: '#aab7c4'
                                 },
                             },
                             invalid: {
@@ -125,10 +120,14 @@ const CheckoutForm = () => {
                     Pay now
                 </button>
             </form>
-            <p className="text-red-500 py-5">error: {error} </p>
-            <p className="text-green-500 py-5">transactionId: {transactionId} </p>
+            <p className="text-red-500 py-5">{error} </p>
+            <p className="text-green-500 py-5">{transactionId && `Paid 500 TK - Transaction ID : ${transactionId}` } </p>
         </div>
     );
 };
 
 export default CheckoutForm;
+
+CheckoutForm.propTypes = {
+    newItem: PropTypes.object
+}

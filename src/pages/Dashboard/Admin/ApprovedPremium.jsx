@@ -58,7 +58,7 @@ const ApprovedPremium = () => {
         <div>
             <div>
                 <h1 className="text-2xl text-left py-5 flex gap-2 items-center">
-                    My Favorites {isLoadingUsersForApprovedPremium ? <div className="w-5 h-5 mt-1"><LoaderIcon /></div> : usersForApprovedPremium?.length}
+                    Total Premium Request {isLoadingUsersForApprovedPremium ? <div className="w-5 h-5 mt-1"><LoaderIcon /></div> : usersForApprovedPremium?.length}
                 </h1>
 
                 <div className="relative overflow-x-auto border sm:rounded-lg">

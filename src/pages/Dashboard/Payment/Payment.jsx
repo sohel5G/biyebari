@@ -6,8 +6,8 @@ import useSingleBiodataById from "../../../hooks/useSingleBiodataById";
 import useAuth from "../../../hooks/useAuth";
 import useSelfBiodata from "../../../hooks/useSelfBiodata";
 import Button from "../../Utils/Button";
-import { useEffect } from "react";
 import LoaderIcon from "../../Utils/LoaderIcon";
+import "./CheckoutForm.css"
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_GATEWAY_PK_TEST);
 
@@ -16,18 +16,11 @@ const Payment = () => {
     const { user } = useAuth();
 
     const [singleBiodata] = useSingleBiodataById(id);
-    const { selfBiodata, refetchSelfBiodata, isLoadingSelfBiodata } = useSelfBiodata();
+    const { selfBiodata, isLoadingSelfBiodata } = useSelfBiodata();
 
-    console.log('Old', singleBiodata);
-
+    // eslint-disable-next-line no-unused-vars
     const { _id, ...itemWithoutId } = singleBiodata;
-    const newItem = { ...itemWithoutId, requesterEmail: user?.email, requesterName: user?.displayName, requesterBiodataId: selfBiodata?.biodataId, biodataItemId: id, };
-
-    useEffect(() => {
-        refetchSelfBiodata();
-    }, [id, refetchSelfBiodata])
-
-    console.log('New', newItem);
+    const newItem = { ...itemWithoutId, requesterEmail: user?.email, requesterName: user?.displayName, requesterBiodataId: selfBiodata?.biodataId, request:'Pending', biodataItemId: id, };
 
 
     return (
@@ -37,7 +30,7 @@ const Payment = () => {
                     <>
                         <div className="h-96 flex justify-center items-center">
                             <div>
-                                <LoaderIcon/>
+                                <LoaderIcon />
                             </div>
                         </div>
                     </> :
@@ -45,22 +38,29 @@ const Payment = () => {
                         {
                             selfBiodata?.biodataId ?
                                 <>
-                                    
-                                    <div>
-                                        <div className="w-80 mx-auto shadow-md p-5 text-center">
-                                            <h1 className="text-lg py-3 font-semibold">Request for contact details</h1>
-                                            <img className="mx-auto w-20" src={singleBiodata?.img} alt="image" />
-                                            <p className="flex justify-between text-lg py- border-t border-b border-gray-200 mt-5"> <span>Biodata ID</span> <span>{singleBiodata?.biodataId}</span></p>
-                                            <p className="flex justify-between text-lg py- border-b border-gray-200"><span>Gender</span><span>{singleBiodata?.type}</span></p>
-                                        </div>
-                                        <div>
 
+                                    <div className="flex flex-col md:flex-row gap-5 justify-center pt-7 pb-10 max-w-[668px] mx-auto">
+                                        <div className="bg-white w-80 mx-auto shadow-md p-5 text-center">
+                                            <h1 className="text-lg pb-3 font-semibold">Requesting for</h1>
+                                            <img className="mx-auto w-20" src={singleBiodata?.img} alt="image" />
+                                            <p className="flex justify-between text-base py-2 border-t border-b border-gray-200 mt-5 "> <span>Biodata ID</span> <span>{singleBiodata?.biodataId}</span></p>
+                                            <p className="flex justify-between text-base py-2 border-b border-gray-200 "><span>Gender</span><span>{singleBiodata?.type}</span></p>
+                                        </div>
+                                        <div className="bg-white w-80 mx-auto shadow-md p-5 text-center">
+                                            <h1 className="text-lg pb-3 font-semibold">Requester</h1>
+                                            <img className="mx-auto w-20" src={selfBiodata?.img} alt="image" />
+                                            <p className="flex justify-between text-base py-2 border-t border-b border-gray-200 mt-5 "> <span>Biodata ID</span> <span>{selfBiodata?.biodataId}</span></p>
+                                            <p className="flex justify-between text-base py-2 border-b border-gray-200 "><span>Gender</span><span>{selfBiodata?.type}</span></p>
                                         </div>
                                     </div>
 
-                                    <div>
+                                    <div className="pb-8">
+                                        <h1 className="font-semibold text-2xl text-center text-sky-500">Payment Amount 500 TK</h1>
+                                    </div>
+
+                                    <div className="stripe-card-input max-w-[668px] mx-auto bg-gray-50 rounded-lg pt-11 mb-14 p-4">
                                         <Elements stripe={stripePromise}>
-                                            <CheckoutForm></CheckoutForm>
+                                            <CheckoutForm newItem={newItem}></CheckoutForm>
                                         </Elements>
                                     </div>
                                 </> :
