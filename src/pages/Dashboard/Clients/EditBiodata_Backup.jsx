@@ -6,7 +6,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useSelfBiodata from "../../../hooks/useSelfBiodata";
 
-const EditBiodata = () => {
+const EditBiodata_Backup = () => {
     const { user } = useAuth();
     const [loadingIcon, setLoadingIcon] = useState(false);
     const axiosSecure = useAxiosSecure();
@@ -53,7 +53,7 @@ const EditBiodata = () => {
                         });
                     }
                     setLoadingIcon(false);
-                    // console.log('Updated', response.data);
+                    console.log('Updated', response.data);
 
                 }).catch((error) => {
                     if (error.message) {
@@ -80,7 +80,7 @@ const EditBiodata = () => {
                         });
                     }
                     setLoadingIcon(false);
-                    // console.log('New added', response.data);
+                    console.log('New added', response.data);
 
                 }).catch((error) => {
                     if (error.message) {
@@ -137,6 +137,7 @@ const EditBiodata = () => {
                             <input
                                 type="url" id="img"  {...register("img")}
                                 placeholder="https://placeholder.png" className="bg-gray-50 border border-gray-300 text-base rounded-lg block w-full p-2.5"
+                                defaultValue={selfBiodata?.img}
                             />
                         </div>
 
@@ -145,6 +146,7 @@ const EditBiodata = () => {
                             <input
                                 type="date" id="birth"  {...register("birth", { required: true })}
                                 placeholder="Date of birth" className="bg-gray-50 border border-gray-300 text-base rounded-lg block w-full p-2.5"
+                                defaultValue={selfBiodata?.birth}
                             />
                             {errors?.birth && <span className="text-red-500"> Date of birth is required</span>}
                         </div>
@@ -311,6 +313,7 @@ const EditBiodata = () => {
                             <input
                                 type="text" id="fathersName"  {...register("fathersName", { required: true })}
                                 placeholder="Fathers name" className="bg-gray-50 border border-gray-300 text-base rounded-lg block w-full p-2.5"
+                                defaultValue={selfBiodata?.fathersName}
                             />
                             {errors?.fathersName && <span className="text-red-500"> Fathers name is required</span>}
                         </div>
@@ -320,6 +323,7 @@ const EditBiodata = () => {
                             <input
                                 type="text" id="mothersName"  {...register("mothersName", { required: true })}
                                 placeholder="Mothers name" className="bg-gray-50 border border-gray-300 text-base rounded-lg block w-full p-2.5"
+                                defaultValue={selfBiodata?.mothersName}
                             />
                             {errors?.mothersName && <span className="text-red-500"> Mothers name is required</span>}
                         </div>
@@ -484,6 +488,7 @@ const EditBiodata = () => {
                             <input
                                 type="text" id="mobile"  {...register("mobile", { required: true })}
                                 placeholder="Mobile number" className="bg-gray-50 border border-gray-300 text-base rounded-lg block w-full p-2.5"
+                                defaultValue={selfBiodata?.mobile}
                             />
                             {errors?.mobile && <span className="text-red-500"> Mobile number is required</span>}
                         </div>
@@ -518,4 +523,4 @@ const EditBiodata = () => {
     );
 };
 
-export default EditBiodata;
+export default EditBiodata_Backup;
