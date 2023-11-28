@@ -22,6 +22,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import BiodataDetails from "../pages/Biodatas/BiodataDetails";
 import AdminRoutes from "../PrivateRoute/AdminRoutes";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import SuccessStory from "../pages/Dashboard/Admin/SuccessStory";
 
 const router = createBrowserRouter([
     {
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
             {
                 path: 'requested',
                 element: <AdminRoutes> <ApprovedContactRequest /> </AdminRoutes>
+            },
+            {
+                path: 'stories',
+                element:<SuccessStory/>
             },
 
 

@@ -3,6 +3,7 @@ import { FaUsers, FaTachometerAlt } from "react-icons/fa";
 import { BiSolidContact } from "react-icons/bi";
 import { RiShutDownLine } from "react-icons/ri";
 import { TbPremiumRights } from "react-icons/tb";
+import { RiVerifiedBadgeLine } from "react-icons/ri";
 
 const AdminRoutes = () => {
     return (
@@ -29,6 +30,12 @@ const AdminRoutes = () => {
                 <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2" to={'/dashboard/requested'}>
                     <span className="text-xl mt-1"><BiSolidContact /></span>
                     <span>Approved Contact Request</span>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink className="hover:bg-gray-200 text-lg font-normal py-3 px-7 hover:text-primary-normal flex gap-2" to={'/dashboard/stories'}>
+                    <span className="text-xl mt-1"><RiVerifiedBadgeLine /></span>
+                    <span>Success Story</span>
                 </NavLink>
             </li>
             <li>

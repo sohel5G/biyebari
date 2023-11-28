@@ -20,7 +20,7 @@ const Payment = () => {
 
     // eslint-disable-next-line no-unused-vars
     const { _id, ...itemWithoutId } = singleBiodata;
-    const newItem = { ...itemWithoutId, requesterEmail: user?.email, requesterName: user?.displayName, requesterBiodataId: selfBiodata?.biodataId, request:'Pending', biodataItemId: id, };
+    const newItem = { ...itemWithoutId, requesterEmail: user?.email, requesterName: user?.displayName, requesterBiodataId: selfBiodata?.biodataId, request: 'Pending', biodataItemId: id, payed: 500 };
 
 
     return (
