@@ -9,8 +9,8 @@ const CheckoutForm = () => {
     const [transactionId, setTransactionId] = useState('');
     const { user } = useAuth();
 
-    const stripe = useStripe;
-    const elements = useElements;
+    const stripe = useStripe();
+    const elements = useElements();
 
     const axiosSecure = useAxiosSecure();
     const totalPrice = 500;

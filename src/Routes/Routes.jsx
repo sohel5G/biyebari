@@ -56,6 +56,10 @@ const router = createBrowserRouter([
             {
                 path: 'login',
                 element: <Login />
+            },
+            {
+                path: 'checkout',
+                element: <PrivateRoute> <Payment /> </PrivateRoute>
             }
         ]
     },
@@ -112,10 +116,6 @@ const router = createBrowserRouter([
             {
                 path: 'logout',
                 element: <Logout />
-            },
-            {
-                path: 'checkout',
-                element: <Payment />
             }
 
         ]

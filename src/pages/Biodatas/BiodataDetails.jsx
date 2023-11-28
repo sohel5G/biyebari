@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom";
 import LoaderIcon from "../Utils/LoaderIcon";
-import BiodataCard from "../Utils/Biodatas/BiodataCard";
 import { useEffect } from "react";
 import useTypeBiodatas from "../../hooks/useTypeBiodatas";
 import useSingleBiodataById from "../../hooks/useSingleBiodataById";
 import { MdFavoriteBorder } from "react-icons/md";
 import useStoreFavorite from "../../hooks/useStoreFavorite";
 import useSelfUser from "../../hooks/useSelfUser";
+import BiodataCard from "../Utils/biodatas/biodataCard";
 
 const BiodataDetails = () => {
     const { id } = useParams();

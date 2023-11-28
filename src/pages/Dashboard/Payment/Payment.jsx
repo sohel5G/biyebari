@@ -6,11 +6,17 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_GATEWAY_PK_TEST);
 
 const Payment = () => {
     return (
-        <div className="bg-slate-100 py-24">
+        <div className="bg-slate-100 py-6">
+            <h1 className="text-center text-2xl pb-8">Request for contact details</h1>
+            <div>
 
-            <Elements stripe={stripePromise}>
-                <CheckoutForm></CheckoutForm>
-            </Elements>
+            </div>
+
+            <div>
+                <Elements stripe={stripePromise}>
+                    <CheckoutForm></CheckoutForm>
+                </Elements>
+            </div>
         </div>
     );
 };
