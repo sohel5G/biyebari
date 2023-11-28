@@ -10,7 +10,7 @@ const EditBiodata = () => {
     const { user } = useAuth();
     const [loadingIcon, setLoadingIcon] = useState(false);
     const axiosSecure = useAxiosSecure();
-    const { selfBiodata } = useSelfBiodata()
+    const { selfBiodata, refetchSelfBiodata } = useSelfBiodata()
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => {
@@ -79,6 +79,7 @@ const EditBiodata = () => {
                             timer: 5000
                         });
                     }
+                    refetchSelfBiodata()
                     setLoadingIcon(false);
                     // console.log('New added', response.data);
 
@@ -92,14 +93,12 @@ const EditBiodata = () => {
                             timer: 5000
                         });
                     }
+                    refetchSelfBiodata()
                     setLoadingIcon(false);
                 })
         }
 
     }
-
-
-    console.log('biodataId:', selfBiodata?.type);
 
     return (
         <>
