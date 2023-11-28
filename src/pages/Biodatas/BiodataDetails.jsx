@@ -21,7 +21,7 @@ const BiodataDetails = () => {
         refetchTypeBiodatas()
     }, [singleBiodata?.type, refetchTypeBiodatas, refetchSelfUser])
 
-    console.log(selfUser.isPro)
+    
 
     return (
         <div className="container mx-auto px-5 grid lg:grid-cols-4 lg:gap-3">

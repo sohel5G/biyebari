@@ -12,15 +12,23 @@ const BiodataCard = ({ item }) => {
         permanentDivision,
         age,
         occupation,
-        _id
+        _id,
+        isPro
     } = item;
 
     return (
         <div>
             <div className='flex flex-col md:flex-row gap-2 items-center justify-between shadow-md hover:shadow-lg bg-white rounded-md border border-[#f1494c1c] hover:border-[#f1494c52] pb-6 md:pb-0'>
-                <div>
+                <div className='mt-4 md:mt-0 relative inline-block w-48 mx-auto'>
                     <Link to={`/biodata/${_id}`}>
-                        <img className='w-48 mt-4 md:mt-0' src={img} alt="profile image" />
+                        <img className='full' src={img} alt="profile image" />
+                        {
+                            isPro === 'Premium'? 
+                                <> <span style={{ padding: '2px 5px', borderRadius: '0px 0px 0px 8px', fontSize: '11px' }} className='absolute top-0 right-0 bg-primary-normal text-white'>Premium</span> </> :
+                            <>
+                            
+                            </>
+                        }
                     </Link>
                 </div>
                 <div className='flex-1 py-2'>

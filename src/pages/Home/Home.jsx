@@ -10,11 +10,12 @@ import totalGirls from "../../assets/img/totalGirls.jpg"
 import totalBoys from "../../assets/img/totalBoys.jpg"
 import totalMarrige from "../../assets/img/totalMarrige.jpg"
 import Slider from "./Slider/Slider";
+import Button from "../Utils/Button";
 
 const Home = () => {
 
-    const [biodatas] = usePremumBiodatas();
-
+    const [filterData] = usePremumBiodatas();
+    
     return (
         <Container>
             <section>
@@ -29,8 +30,11 @@ const Home = () => {
                 />
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 gap-y-5 items-center justify-between">
                     {
-                        biodatas.map(item => <BiodataCard key={item.id} item={item} />)
+                        filterData.map(item => <BiodataCard key={item._id} item={item} />)
                     }
+                </div>
+                <div className="flex justify-center py-5 mt-14">
+                    <Button text="View All Biodata" link="/biodatas"/>
                 </div>
             </section>
 

@@ -7,10 +7,11 @@ import ClientRoutes from "../Dashboard/Routes/ClientRoutes";
 import PublicRoutes from "../Dashboard/Routes/PublicRoutes";
 import { Outlet } from "react-router-dom";
 import useSelfUser from "../../hooks/useSelfUser";
+import LoaderIcon from "../Utils/LoaderIcon";
 
 const DashboardLayout = () => {
     const [showSidebar, setShowSidebar] = useState(window.innerWidth >= 1024);
-    const { selfUser } = useSelfUser();
+    const { selfUser, isLoadingSelfUser } = useSelfUser();
 
     // Function to toggle sidebar visibility
     const toggleSidebar = () => {
@@ -65,15 +66,25 @@ const DashboardLayout = () => {
                         <div>
                             <ul className="dashboard-menu mt-20 pb-10">
 
-                                {
-                                    selfUser?.userRole === 'Admin' ?
-                                        <>
-                                            <AdminRoutes />
-                                        </> :
-                                        <>
-                                            <ClientRoutes />
-                                        </>
-                                }
+                               {
+                                    isLoadingSelfUser ? 
+                                    <>
+                                    <div className="flex h-60 justify-center items-center"> 
+                                        <div> <LoaderIcon /> </div>
+                                    </div>
+                                    </> : 
+                                    <>
+                                        {
+                                            selfUser?.userRole === 'Admin' ?
+                                                <>
+                                                    <AdminRoutes />
+                                                </> :
+                                                <>
+                                                    <ClientRoutes />
+                                                </>
+                                        }
+                                    </>
+                               }
 
                                 <hr className="my-8" />
 

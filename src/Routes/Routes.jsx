@@ -21,6 +21,7 @@ import ContactUs from "../pages/Contact/ContactUs";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import BiodataDetails from "../pages/Biodatas/BiodataDetails";
 import AdminRoutes from "../PrivateRoute/AdminRoutes";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -112,7 +113,10 @@ const router = createBrowserRouter([
                 path: 'logout',
                 element: <Logout />
             },
-
+            {
+                path: 'checkout',
+                element: <Payment />
+            }
 
         ]
     }

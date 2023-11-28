@@ -1,16 +1,21 @@
-import { useEffect, useState } from "react";
-
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "./useAxiosPublic";
 
 const usePremumBiodatas = () => {
-    const [biodatas, setBiodatas] = useState([])
+    
+    const axiosPublic = useAxiosPublic();
 
-    useEffect(() => {
-        fetch('biosdatas.json')
-            .then(res => res.json())
-            .then(data => setBiodatas(data))
-    }, [])
+    const {data:premiumBiodata = [] } = useQuery({
+        queryKey: ['premiumBiodata'],
+        queryFn: async () => {
+            const res = await axiosPublic(`/biodatas?premium=Premium`);
+            return res.data;
+        }
+    })
 
-    return [biodatas]
+    const filterData = premiumBiodata.slice(0, 6);
+
+    return [filterData];
 };
 
 export default usePremumBiodatas;
