@@ -23,6 +23,7 @@ import BiodataDetails from "../pages/Biodatas/BiodataDetails";
 import AdminRoutes from "../PrivateRoute/AdminRoutes";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import SuccessStory from "../pages/Dashboard/Admin/SuccessStory";
+import GotMarried from "../pages/Dashboard/Clients/GotMarried";
 
 const router = createBrowserRouter([
     {
@@ -117,6 +118,10 @@ const router = createBrowserRouter([
             {
                 path: 'favourite',
                 element: <MyFavourites />
+            },
+            {
+                path:'got-married',
+                element:<GotMarried/>
             },
             {
                 path: 'logout',
