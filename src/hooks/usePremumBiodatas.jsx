@@ -5,7 +5,7 @@ const usePremumBiodatas = () => {
     
     const axiosPublic = useAxiosPublic();
 
-    const {data:premiumBiodata = [] } = useQuery({
+    const { data: premiumBiodata = [], isPending: isLoadingPremiumBiodata } = useQuery({
         queryKey: ['premiumBiodata'],
         queryFn: async () => {
             const res = await axiosPublic(`/biodatas?premium=Premium`);
@@ -15,7 +15,7 @@ const usePremumBiodatas = () => {
 
     const filterData = premiumBiodata.slice(0, 6);
 
-    return [filterData];
+    return [filterData, isLoadingPremiumBiodata];
 };
 
 export default usePremumBiodatas;

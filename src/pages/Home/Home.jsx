@@ -1,7 +1,5 @@
-import usePremumBiodatas from "../../hooks/usePremumBiodatas";
 import Container from "../Utils/Container";
 import SectionTitle from "../Utils/SectionTitle";
-import BiodataCard from "../Utils/biodatas/biodataCard";
 import Banner from "./Banner/Banner";
 import profile from "../../assets/icons/profile.png"
 import query from "../../assets/icons/query.png"
@@ -11,10 +9,12 @@ import totalBoys from "../../assets/img/totalBoys.jpg"
 import totalMarrige from "../../assets/img/totalMarrige.jpg"
 import Slider from "./Slider/Slider";
 import Button from "../Utils/Button";
+import PremiumBiodata from "./PremiumBiodata";
+import useAdminStatistic from "../../hooks/useAdminStatistic";
+import LoaderIcon from "../Utils/LoaderIcon";
 
 const Home = () => {
-    const [filterData] = usePremumBiodatas();
-    
+    const { adminStatistic, isLoadingAdminStatistic } = useAdminStatistic();
     return (
         <Container>
             <section>
@@ -27,13 +27,11 @@ const Home = () => {
                     blackTitle="Biodata"
                     subTitle="Discover Our Premium Members for Lasting Connections"
                 />
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 gap-y-5 items-center justify-between">
-                    {
-                        filterData.map(item => <BiodataCard key={item._id} item={item} />)
-                    }
-                </div>
+
+                <PremiumBiodata />
+
                 <div className="flex justify-center py-5 mt-14">
-                    <Button text="View All Biodata" link="/biodatas"/>
+                    <Button text="View All Biodata" link="/biodatas" />
                 </div>
             </section>
 
@@ -79,7 +77,19 @@ const Home = () => {
                         <div className="rounded-lg absolute top-0 left-0 flex justify-center items-center bg-[#00000061] min-h-full min-w-full">
                             <div className="text-center">
                                 <h1 className="text-3xl font-medium text-white py-2">Total Boys</h1>
-                                <p className="text-xl text-white py-2">320</p>
+                                <div>
+                                    {
+                                        isLoadingAdminStatistic ?
+                                            <div className="flex justify-center items-center py-2">
+                                                <div>
+                                                    <LoaderIcon />
+                                                </div>
+                                            </div> :
+                                            <>
+                                                <p className="text-xl text-white py-2">{adminStatistic?.maleBiodata}</p>
+                                            </>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -92,7 +102,19 @@ const Home = () => {
                         <div className="rounded-lg absolute top-0 left-0 flex justify-center items-center bg-[#00000061] min-h-full min-w-full">
                             <div className="text-center">
                                 <h1 className="text-3xl font-medium text-white py-2">Total Girls</h1>
-                                <p className="text-xl text-white py-2">320</p>
+                                <div>
+                                    {
+                                        isLoadingAdminStatistic ?
+                                            <div className="flex justify-center items-center py-2">
+                                                <div>
+                                                    <LoaderIcon />
+                                                </div>
+                                            </div> :
+                                            <>
+                                                <p className="text-xl text-white py-2">{adminStatistic?.femaleBiodata}</p>
+                                            </>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -105,7 +127,19 @@ const Home = () => {
                         <div className="rounded-lg absolute top-0 left-0 flex justify-center items-center bg-[#00000061] min-h-full min-w-full">
                             <div className="text-center">
                                 <h1 className="text-3xl font-medium text-white py-2">Total Marrige</h1>
-                                <p className="text-xl text-white py-2">320</p>
+                                <div>
+                                    {
+                                        isLoadingAdminStatistic ?
+                                            <div className="flex justify-center items-center py-2">
+                                                <div>
+                                                    <LoaderIcon />
+                                                </div>
+                                            </div> :
+                                            <>
+                                                <p className="text-xl text-white py-2">{adminStatistic?.totalMarrige}</p>
+                                            </>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -119,7 +153,7 @@ const Home = () => {
                     subTitle="Celebrating Love Stories, Journeying Together Towards Everlasting Happiness"
                 />
                 <div>
-                    <Slider/>
+                    <Slider />
                 </div>
             </section>
         </Container>
