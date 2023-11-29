@@ -11,9 +11,7 @@ import useStories from '../../../hooks/useStories';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-const Slider = () => {
-    
-
+const Slider_Backup = () => {
 
     const [sortOrder, setSortOrder] = useState('asc');
     const [originalData, setOriginalData] = useState([]);
@@ -21,39 +19,34 @@ const Slider = () => {
     const { stories } = useStories();
 
     useEffect(() => {
-        if (!arraysAreEqual(originalData, stories)) {
-            setOriginalData(stories);
-        }
-    }, [stories, originalData]);
+        // Update originalData when stories change
+        setOriginalData(stories);
+    }, [stories]);
 
     useEffect(() => {
-        
-        const calculateSortedData = () => {
-            return [...originalData].sort((a, b) => {
-                const dateA = new Date(a.date);
-                const dateB = new Date(b.date);
-
-                return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
-            });
-        };
-
-        
-        setSortedData(calculateSortedData());
+        // Update sortedData whenever sortOrder or originalData changes
+        sortData();
     }, [sortOrder, originalData]);
 
     const handleSortChange = (event) => {
         setSortOrder(event.target.value);
     };
 
-    
-    const arraysAreEqual = (arr1, arr2) => {
-        return JSON.stringify(arr1) === JSON.stringify(arr2);
+    const sortData = () => {
+        const newData = [...originalData].sort((a, b) => {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+
+            return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+        });
+
+        setSortedData(newData);
     };
 
 
     return (
         <>
-           <div>
+            <div>
                 <h2 className="text-center text-xl font-semibold">Sort By Date</h2>
                 <div className="flex gap-4 justify-center pt-3 pb-10">
                     <label className="flex gap-1 font-medium hover:text-primary-normal cursor-pointer">
@@ -79,7 +72,7 @@ const Slider = () => {
                         Descending
                     </label>
                 </div>
-           </div>
+            </div>
 
             <Swiper
                 navigation={true}
@@ -117,7 +110,7 @@ const Slider = () => {
                                 <p className='text-sm mt-3'>{item?.review}</p>
                             </div>
                         </div>
-                    </SwiperSlide> )
+                    </SwiperSlide>)
                 }
 
 
@@ -138,4 +131,4 @@ const Slider = () => {
     );
 };
 
-export default Slider;
+export default Slider_Backup;
