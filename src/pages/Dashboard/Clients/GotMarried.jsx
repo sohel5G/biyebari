@@ -17,6 +17,7 @@ const GotMarried = () => {
             partnerName: data.partnerName,
             selfId: data.selfId,
             partnerId: data.partnerId,
+            date: data.date,
             coupleImg: data.coupleImg,
             review: data.review,
             rating: rating,
@@ -77,10 +78,19 @@ const GotMarried = () => {
                             className="bg-gray-50 border border-gray-300 text-base rounded-lg block w-full p-2.5"
                         />
                     </div>
+
                     <div className="w-full">
                         <label htmlFor="partnerId" className="block mb-2 font-medium"> Partner Biodata ID*</label>
                         <input
                             type="text" id="partnerId"  {...register("partnerId")}
+                            className="bg-gray-50 border border-gray-300 text-base rounded-lg block w-full p-2.5"
+                        />
+                    </div>
+
+                    <div className="w-full">
+                        <label htmlFor="date" className="block mb-2 font-medium"> Marriage date*</label>
+                        <input
+                            type="date" id="date"  {...register("date")}
                             className="bg-gray-50 border border-gray-300 text-base rounded-lg block w-full p-2.5"
                         />
                     </div>
