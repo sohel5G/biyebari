@@ -17,6 +17,11 @@ const Biodatas = () => {
 
     const [biodatas, , isBiodataLoading] = useBiodatas(viewAll, typeValue, divisionValue, minValue, maxValue);
 
+
+
+
+
+
     const handleViewAll = () => {
         setTypeValue(null);
         setDivisionValue(null);

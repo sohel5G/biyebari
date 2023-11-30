@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -16,7 +16,6 @@ const Register = () => {
     const [showPass, setShowPass] = useState(true);
 
     const navigate = useNavigate();
-    const location = useLocation();
 
     const axiosPublic = useAxiosPublic()
 
@@ -52,7 +51,7 @@ const Register = () => {
                                     // console.log('User stored into database', res.data);
 
                                     reset()
-                                    navigate(location?.state ? location?.state : '/');
+                                    navigate('/');
                                     setSubmitBtnLoader(false);
 
                                 }
