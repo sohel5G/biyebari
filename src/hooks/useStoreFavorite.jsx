@@ -10,7 +10,7 @@ const useStoreFavorite = () => {
 
         const { _id, ...itemWithoutId } = item;
         const newItem = {...itemWithoutId, favMakerEmail: user?.email, biodataItemId: _id,};
-
+        
         axiosSecure.post('/favorites', newItem)
 
             .then(response => {

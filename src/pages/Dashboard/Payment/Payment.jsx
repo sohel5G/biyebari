@@ -69,7 +69,7 @@ const Payment = () => {
                                 <>
                                     <div className="flex h-96 items-center justify-center">
                                         <div className="text-center">
-                                            <h1 className="text-4xl text-gray-400 font-medium py-2">Not found !</h1>
+                                            <h1 className="text-4xl text-gray-400 font-medium py-2">Sorry !</h1>
                                             <p className="text-2xl text-gray-400 py-3 pb-7">Please create your own biodata first before send request to view other contact info</p>
                                             <Button text="Create My Biodata" link="/dashboard/add" />
                                         </div>

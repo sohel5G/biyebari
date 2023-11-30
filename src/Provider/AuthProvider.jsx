@@ -14,8 +14,8 @@ const Authprovider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    
-    
+
+
 
     const googleSignInWithPopup = () => {
         setLoading(true)
@@ -49,7 +49,10 @@ const Authprovider = ({ children }) => {
                 axiosPublic.post('/jwt', { email: userEmail })
                     .then(res => {
                         console.log('userKey set : ', res.data.success)
+                    }).catch((err) => {
+                        console.log('UserKey create error', err);
                     })
+
             }
             // set a userKey for this user end
 
@@ -61,7 +64,7 @@ const Authprovider = ({ children }) => {
                     })
             }
             //remove userKey if user logout end
-            
+
 
         });
 
