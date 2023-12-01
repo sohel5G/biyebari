@@ -47,9 +47,7 @@ const Register = () => {
                                         showConfirmButton: false,
                                         timer: 3000
                                     });
-
                                     // console.log('User stored into database', res.data);
-
                                     reset()
                                     navigate('/');
                                     setSubmitBtnLoader(false);
@@ -221,7 +219,7 @@ const Register = () => {
                                 type="submit"
                                 className={`bg-primary-normal text-white cursor-pointer font-medium rounded-lg text-sm px-5 py-2.5`}
                             />
-                            {submitBtnLoader && <LoaderIcon/>}
+                            {submitBtnLoader && <LoaderIcon />}
                         </div>
 
                         <p className="text-sm font-light text-gray-500">
