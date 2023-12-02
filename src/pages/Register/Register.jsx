@@ -17,7 +17,7 @@ const Register = () => {
 
     const navigate = useNavigate();
 
-    const axiosPublic = useAxiosPublic()
+    const axiosPublic = useAxiosPublic();
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const onSubmit = data => {

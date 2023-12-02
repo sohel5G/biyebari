@@ -4,6 +4,7 @@ import LoaderIcon from "../Utils/LoaderIcon";
 import BiodataCard from "../Utils/biodatas/biodataCard";
 import "./Biodatas.css";
 import MultiRangeSlider from "multi-range-slider-react";
+import useTotalBiodataForPagination from "../../hooks/useTotalBiodataForPagination";
 
 const Biodatas = () => {
     const [viewAll, setViewAll] = useState(null);
@@ -18,9 +19,26 @@ const Biodatas = () => {
     const [biodatas, , isBiodataLoading] = useBiodatas(viewAll, typeValue, divisionValue, minValue, maxValue);
 
 
+    // --------------------------------- PAGINATION ------------------------------------
+    const { totalBiodataForPagination } = useTotalBiodataForPagination();
+    const [totalPaginationBiodata, setTotalPaginationBiodata] = useState(0);
+    const itemPerPage = 5;
+    const numberOfPages = Math.ceil(totalPaginationBiodata / itemPerPage);
+
+    // const pages = [];
+    // for (let i = 0; i < numberOfPages; i++) {
+    //     pages.push(i + 1);
+    // }
+
+
+    useEffect(() => {
+        setTotalPaginationBiodata(totalBiodataForPagination || 0);
+    }, [totalBiodataForPagination])
+    const pages = [...Array(numberOfPages).keys()];
 
 
 
+    //-------------------------------- PAGINATION END --------------------------------------
 
     const handleViewAll = () => {
         setTypeValue(null);
@@ -44,8 +62,6 @@ const Biodatas = () => {
         setMaxValue(null);
     }
 
-
-
     useEffect(() => {
         setMinMaxAutoRunStop(false);
     }, [viewAll, typeValue, divisionValue, minValue, maxValue])
@@ -64,8 +80,11 @@ const Biodatas = () => {
     };
 
 
+    console.log(pages);
+
     return (
         <div className="container mx-auto px-5 grid lg:grid-cols-4 lg:gap-3">
+            {/* Filter Section  */}
             <div className="border-b-2 lg:border-b-0 lg:border-r bg-[#ffffffc2]">
 
 
@@ -312,6 +331,7 @@ const Biodatas = () => {
                 </div>
             </div>
 
+            {/* Content section  */}
             <div className="lg:col-span-3">
                 <h1 className="text-2xl text-left pt-5 flex gap-2 items-center">
                     Total Biodatas {isBiodataLoading ? <div className="w-5 h-5 mt-1"><LoaderIcon /></div> : biodatas?.length}
@@ -343,6 +363,11 @@ const Biodatas = () => {
                             }
                         </>
                 }
+                <div className="text-center pt-3 pb-10">
+                    {
+                        pages.map((page, i) => <button key={i} className="py-1 px-3 text-white rounded-full bg-primary-normal mx-2">{page}</button>)
+                    }
+                </div>
             </div>
         </div>
     );

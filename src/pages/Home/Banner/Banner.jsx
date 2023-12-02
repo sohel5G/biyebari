@@ -32,7 +32,7 @@ const Banner = () => {
                             <div className='text-left flex-1 max-w-5xl pl-5 md:pl-10 lg:pl-2'>
                                 <h1 className="text-3xl text-white font-medium">Discover Love</h1>
                                 <p className="text-xl py-5 text-white"> Find Your Perfect Match Today</p>
-                                <ButtonOutLine text="Browse Biodatas" link="#" />
+                                <ButtonOutLine text="Browse Biodatas" link="/biodatas" />
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@ const Banner = () => {
                             <div className='text-left flex-1 max-w-5xl pl-5 md:pl-10 lg:pl-2'>
                                 <h1 className="text-3xl text-white font-medium">Journey to Forever</h1>
                                 <p className="text-xl py-5 text-white"> Start Your Matrimony Adventure</p>
-                                <ButtonOutLine text="Browse Biodatas" link="#" />
+                                <ButtonOutLine text="Browse Biodatas" link="/biodatas" />
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@ const Banner = () => {
                             <div className='text-left flex-1 max-w-5xl pl-5 md:pl-10 lg:pl-2'>
                                 <h1 className="text-3xl text-white font-medium">Unite Hearts</h1>
                                 <p className="text-xl py-5 text-white"> Creating Lifelong Bonds</p>
-                                <ButtonOutLine text="Browse Biodatas" link="#" />
+                                <ButtonOutLine text="Browse Biodatas" link="/biodatas" />
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@ const Banner = () => {
                             <div className='text-left flex-1 max-w-5xl pl-5 md:pl-10 lg:pl-2'>
                                 <h1 className="text-3xl text-white font-medium">Bengali Bliss</h1>
                                 <p className="text-xl py-5 text-white"> Connect, Communicate, Commit</p>
-                                <ButtonOutLine text="Browse Biodatas" link="#" />
+                                <ButtonOutLine text="Browse Biodatas" link="/biodatas" />
                             </div>
                         </div>
                     </div>

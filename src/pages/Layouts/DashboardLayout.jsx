@@ -12,13 +12,15 @@ import LoaderIcon from "../Utils/LoaderIcon";
 const DashboardLayout = () => {
     const [showSidebar, setShowSidebar] = useState(window.innerWidth >= 1024);
     const { selfUser, isLoadingSelfUser } = useSelfUser();
+    const isLargeScreen = window.innerWidth >= 1024;
 
-    // Function to toggle sidebar visibility
+    console.log('isLargeScreen', isLargeScreen);
+
     const toggleSidebar = () => {
         setShowSidebar(!showSidebar);
     };
 
-    // Update showSidebar state on window resize
+
     useEffect(() => {
         const handleResize = () => {
             setShowSidebar(window.innerWidth >= 1024);
@@ -31,7 +33,7 @@ const DashboardLayout = () => {
         };
     }, []);
 
-    // Inline styles for transition
+
     const sidebarStyles = {
         transform: showSidebar ? 'translateX(0)' : 'translateX(-100%)',
         transition: 'transform 300ms ease-in-out',
@@ -51,10 +53,9 @@ const DashboardLayout = () => {
             {showSidebar && (<div className="lg:hidden fixed top-0 left-0 w-full h-full bg-[#000000b0]" onClick={toggleSidebar} />)}
 
 
-
             <div className="lg:grid lg:grid-cols-4 lg:gap-3">
 
-                <div className="bg-gray-50 fixed lg:relative w-80 lg:w-full top-0 left-0 z-50" style={sidebarStyles}>
+                <div className="bg-gray-50 fixed lg:relative w-80 lg:w-full top-0 left-0 z-50" style={sidebarStyles} onClick={() => !isLargeScreen ? toggleSidebar() : ''}>
                     <div className="h-screen relative overflow-y-auto">
                         {showSidebar && (
                             <span onClick={toggleSidebar} className="absolute top-0 right-0 text-red-500 text-3xl p-5 hover:bg-[#ff000012] lg:hidden cursor-pointer">
@@ -66,25 +67,25 @@ const DashboardLayout = () => {
                         <div>
                             <ul className="dashboard-menu mt-20 pb-10">
 
-                               {
-                                    isLoadingSelfUser ? 
-                                    <>
-                                    <div className="flex h-60 justify-center items-center"> 
-                                        <div> <LoaderIcon /> </div>
-                                    </div>
-                                    </> : 
-                                    <>
-                                        {
-                                            selfUser?.userRole === 'Admin' ?
-                                                <>
-                                                    <AdminRoutes />
-                                                </> :
-                                                <>
-                                                    <ClientRoutes />
-                                                </>
-                                        }
-                                    </>
-                               }
+                                {
+                                    isLoadingSelfUser ?
+                                        <>
+                                            <div className="flex h-60 justify-center items-center">
+                                                <div> <LoaderIcon /> </div>
+                                            </div>
+                                        </> :
+                                        <>
+                                            {
+                                                selfUser?.userRole === 'Admin' ?
+                                                    <>
+                                                        <AdminRoutes />
+                                                    </> :
+                                                    <>
+                                                        <ClientRoutes />
+                                                    </>
+                                            }
+                                        </>
+                                }
 
                                 <hr className="my-8" />
 
