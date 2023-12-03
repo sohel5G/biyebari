@@ -14,8 +14,6 @@ const DashboardLayout = () => {
     const { selfUser, isLoadingSelfUser } = useSelfUser();
     const isLargeScreen = window.innerWidth >= 1024;
 
-    console.log('isLargeScreen', isLargeScreen);
-
     const toggleSidebar = () => {
         setShowSidebar(!showSidebar);
     };

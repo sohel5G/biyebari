@@ -16,14 +16,19 @@ const Biodatas = () => {
     const [minValue, setMinValue] = useState(null);
     const [maxValue, setMaxValue] = useState(null);
 
-    const [biodatas, , isBiodataLoading] = useBiodatas(viewAll, typeValue, divisionValue, minValue, maxValue);
+
 
 
     // --------------------------------- PAGINATION ------------------------------------
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(6);
+
     const { totalBiodataForPagination } = useTotalBiodataForPagination();
     const [totalPaginationBiodata, setTotalPaginationBiodata] = useState(0);
-    const itemPerPage = 5;
-    const numberOfPages = Math.ceil(totalPaginationBiodata / itemPerPage);
+
+    const numberOfPages = Math.ceil(totalPaginationBiodata / itemsPerPage);
+
+    const [biodatas, , isBiodataLoading] = useBiodatas(viewAll, typeValue, divisionValue, minValue, maxValue, currentPage, itemsPerPage);
 
     // const pages = [];
     // for (let i = 0; i < numberOfPages; i++) {
@@ -34,11 +39,29 @@ const Biodatas = () => {
     useEffect(() => {
         setTotalPaginationBiodata(totalBiodataForPagination || 0);
     }, [totalBiodataForPagination])
-    const pages = [...Array(numberOfPages).keys()];
+    const pages = [...Array(numberOfPages).keys()].map(page => page + 1);
 
+    const handleItemsPerPage = e => {
+        setItemsPerPage(parseInt(e.target.value));
+        setCurrentPage(1);
+    }
+
+    const handlePrevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1)
+        }
+    }
+
+    const handleNextPage = () => {
+        if (currentPage < pages.length) {
+            setCurrentPage(currentPage + 1)
+        }
+    }
 
 
     //-------------------------------- PAGINATION END --------------------------------------
+
+
 
     const handleViewAll = () => {
         setTypeValue(null);
@@ -80,7 +103,6 @@ const Biodatas = () => {
     };
 
 
-    console.log(pages);
 
     return (
         <div className="container mx-auto px-5 grid lg:grid-cols-4 lg:gap-3">
@@ -90,7 +112,7 @@ const Biodatas = () => {
 
                 {/* View All  */}
 
-                <div className="m-3 p-2 bg-white border border-gray-200 rounded-sm mt-12">
+                <div className="m-3 p-2 bg-white border border-gray-200 rounded-sm mt-7">
                     <h3 className="mb-1 pl-3 font-semibold text-gray-900">
                         View all Biodata
                     </h3>
@@ -333,9 +355,20 @@ const Biodatas = () => {
 
             {/* Content section  */}
             <div className="lg:col-span-3">
-                <h1 className="text-2xl text-left pt-5 flex gap-2 items-center">
-                    Total Biodatas {isBiodataLoading ? <div className="w-5 h-5 mt-1"><LoaderIcon /></div> : biodatas?.length}
-                </h1>
+                {/* <h1 className="text-2xl text-left pt-5 flex gap-2 items-center">
+                    <span> Total Biodatas </span>
+                    {
+                        isBiodataLoading ?
+                            <div className="w-5 h-5 mt-1"><LoaderIcon /></div> :
+                            biodatas?.length
+                    }
+                    <span> of </span>
+                    {
+                        isBiodataLoading ?
+                            <div className="w-5 h-5 mt-1"><LoaderIcon /></div> :
+                            <span> {currentPage * itemsPerPage} / {itemsPerPage} </span>
+                    }
+                </h1> */}
 
                 {
                     isBiodataLoading ?
@@ -363,11 +396,34 @@ const Biodatas = () => {
                             }
                         </>
                 }
-                <div className="text-center pt-3 pb-10">
-                    {
-                        pages.map((page, i) => <button key={i} className="py-1 px-3 text-white rounded-full bg-primary-normal mx-2">{page}</button>)
-                    }
+
+                {/* Pagination  */}
+                <div className="pt-3 pb-10 flex gap-5 justify-center">
+                    <div>
+                        <button onClick={handlePrevPage} className="py-1 px-3 text-white rounded-full bg-gray-500 mx-2 hover:bg-primary-normal">Prev</button>
+                        {
+                            pages.map(page => <button
+                                onClick={() => setCurrentPage(page)}
+                                key={page}
+                                className={`py-1 px-3 text-white rounded-full bg-gray-500 mx-2 ${currentPage === page && '!bg-primary-normal'}`}>{page}</button>)
+                        }
+                        <button onClick={handleNextPage} className="py-1 px-3 text-white rounded-full bg-gray-500 mx-2 hover:bg-primary-normal">Next</button>
+                    </div>
+                    <div>
+                        <select onChange={handleItemsPerPage} className="bg-primary-normal py-1 px-3 text-white rounded-md border-0 border-primary-normal">
+                            <option value="6">6</option>
+                            <option value="12">12</option>
+                            <option value="18">18</option>
+                            <option value="24">24</option>
+                            <option value="30">30</option>
+                            <option value="36">36</option>
+                            <option value="42">42</option>
+                            <option value="48">48</option>
+                        </select>
+                    </div>
                 </div>
+                {/* Pagination End */}
+
             </div>
         </div>
     );
