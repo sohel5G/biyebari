@@ -8,11 +8,11 @@ Biye Bari is a Matrimony Website designed to provide users with a seamless exper
 
 ## Key Features:
 
-### User Authentication:
+#### User Authentication:
 - Users can create accounts and log in securely using Firebase authentication.
 - Admins have a dedicated login for managing the platform.
 
-### User Dashboard:
+#### User Dashboard:
 - A personalized dashboard for users to manage their biodata and premium requests.
 Admin Dashboard:
 - An admin dashboard to oversee and manage user requests and premium approvals.
@@ -21,26 +21,26 @@ Biodata Creation:
 Premium Biodata:
 - Users can elevate their biodata to premium status for enhanced visibility.
 
-### Contact Request:
+#### Contact Request:
 - Users can request contact information of other users' biodata.
 - Stripe payment integration for secure transactions when requesting contact information.
 
-### Admin Approval:
+#### Admin Approval:
 - Admins have the authority to approve user requests for contact information.
 - Premium user requests are also approved by the admin.
 
 ## Technologies Used:
 
-### Frontend:
+#### Frontend:
 - React.js for building a dynamic and responsive user interface.
 - React Router for seamless navigation within the application.
 - Tailwind CSS and Flowbite for styling and UI components.
 
-### Backend:
+#### Backend:
 - Node.js and Express.js for server-side development.
 - Mongoose for interacting with the MongoDB database.
 
-### Authentication and Payment:
+#### Authentication and Payment:
 - Firebase for secure user authentication.
 - Stripe Payment method for handling transactions.
 - JWT (JSON Web Tokens) for secure communication between the frontend and backend.
